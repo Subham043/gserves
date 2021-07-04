@@ -1,0 +1,12 @@
+.login__row .extra__link__login{background-color: transparent !important; color: gray; text-align: left;text-decoration: underline;}
+
+.login__row{
+    width: 40%;
+}
+
+@media screen and (max-width:600px) {
+    .login__row{
+        width: 100%;
+    } 
+}
+

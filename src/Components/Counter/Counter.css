@@ -1,0 +1,79 @@
+.counter__div{
+    background-image: linear-gradient(rgba(0, 160, 139, 0.9), rgba(0, 160, 139, 0.9)), url(../../Assets/counter-banner.jpg);
+    position: relative;
+    min-height: 430px;
+    background-position: bottom;
+    width:100%;
+    padding:55px 0;
+}
+
+
+
+.main__inner_div{
+    display: grid;
+    place-items: center;
+}
+
+.first__inner__counter__div{
+    display: grid;
+    place-items: center;
+    padding: 5px;
+    border:1px solid #fff;
+    width: 150px;
+    height:150px;
+    border-radius:50%;
+}
+
+.scnd__inner__counter__div{
+    width:100%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    font-size:30px;
+    color: rgba(0, 160, 139, 0.7);
+    font-weight: 500;
+}
+
+.main__inner_text{
+    text-align: center;
+    color: white;
+    padding: 20px 0;
+}
+
+.counter__heading{
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    font-size:35px;
+    
+}
+.counter_text{
+    color:white;
+    margin-bottom: 65px;
+    text-align: center;
+}
+
+@media screen and (max-width:1024px) {
+    .counter__div {
+        padding: 10px;
+        padding-top:40px;
+    }
+
+    .counter_text {
+        margin-bottom: 35px;
+    }
+}
+
+@media screen and (max-width:600px){
+    .counter__div {
+        padding: 10px;
+        padding-top:40px;
+    }
+
+    .counter_text {
+        margin-bottom: 35px;
+    }
+}

@@ -1,0 +1,24 @@
+.search__input__div{
+    text-align: center;
+}
+.search__input__div .search__input{
+    display: inline-block;
+    width:60%;
+    padding:15px;
+    outline: none;
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+.search__input__div .seacrh__btn{
+    display: inline-block;
+    width:10%;
+    padding:15px;
+    outline: none;
+    border: none;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgba(0, 160, 139, 1);
+    color: white;
+}

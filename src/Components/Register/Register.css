@@ -1,0 +1,104 @@
+.register__row{
+    width: 60%;
+    margin: auto !important;
+}
+
+.register__row  .form__row{
+    margin-bottom: 15px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.register__row .input-group-text{
+    border-radius: 0 !important;
+    background-color: rgba(0, 160, 139, 0.2) !important;
+    border-color: rgba(0, 160, 139, 0.2) !important;
+}
+
+.register__row .form-control{
+    border: 1px solid  rgba(0, 160, 139, 0.2) !important;
+    border-left: none !important;
+}
+
+.svgColor path{
+    color:rgba(0, 160, 139, 1) !important;
+}
+
+.register__row .send__inputgroup{
+    background-color: rgba(0, 160, 139, 1) !important;
+}
+
+.register__row .send__btn{
+    background-color: rgba(0, 160, 139, 1) !important;
+    color: #fff;
+}
+
+.register__row .send__svgColor path{
+    stroke: #fff !important;
+}
+
+.register__row .mobile__form__row .form-control{
+    border-left: 1px solid  rgba(0, 160, 139, 0.2) !important;
+}
+
+.register__row .checkbox__form__row .form-check{
+    border: 1px solid  rgba(0, 160, 139, 0.2) !important;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.register__row  .button__row{padding: 0;}
+
+.register__row .register__btn{
+    width: 90%;
+    padding: 8px 0;
+    background-color: grey;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius:5px;
+}
+
+.register__row  .register__btn__right .register__btn{
+    background-color: rgba(0, 160, 139, 1);
+}
+
+.register__row  .register__btn__left{text-align: left;}
+.register__row  .register__btn__center{text-align: center;}
+.register__row  .register__btn__right{text-align: right;}
+
+@media screen and (max-width:1024px){
+    .register__row{
+        width: 100%;
+    }
+    .register__row .register__btn__left{text-align: center;margin-bottom:10px;order:2;}
+    .register__row .register__btn__center{text-align: center;margin-bottom:10px;order:1;}
+    .register__row .register__btn__right{text-align: center;margin-bottom:10px;order:0;}
+
+    .register__row .register__btn{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width:600px){
+    .register__row{
+        width: 100%;
+    }
+    .register__row .register__btn__left{text-align: center;margin-bottom:10px;order:2;}
+    .register__row .register__btn__center{text-align: center;margin-bottom:10px;order:1;}
+    .register__row .register__btn__right{text-align: center;margin-bottom:10px;order:0;}
+
+    .register__row .register__btn{
+        width: 100%;
+    }
+
+}

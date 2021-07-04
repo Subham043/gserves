@@ -1,0 +1,9 @@
+.small__banner__div{
+    position: relative;
+    padding-top: 125px;
+    padding-bottom: 50px;
+}
+
+.small__banner__div .slider__div{
+    margin-top: 55px;
+}

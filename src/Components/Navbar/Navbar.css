@@ -1,0 +1,66 @@
+.navBar{
+    position: fixed;
+    top:0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    padding: 18px 0;
+    z-index: 999;
+}
+
+.dropdown__div, .auth__div{
+    flex: 0 0 auto;
+    width:30%;
+}
+
+
+.logo__div{
+    flex: 0 0 auto;
+    width:40%;
+}
+
+.logo p{
+    color: white;
+    font-size: 30px;
+}
+
+.location_div button, .register_div button, .login_div button{
+    margin-top:15px;
+    color: white;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.services_div div{
+    margin-top:15px;
+    text-decoration: none;
+}
+
+#basic-nav-dropdown{
+    color: white;
+}
+
+.dropdown-toggle::after{border-top:none !important;}
+
+.dropdown__btn{
+    color: white;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.mobile__nav{display: none;}
+
+@media screen and (max-width:768px){
+    .desktop__nav{display: none ;}
+    .mobile__nav{display: block;}
+
+    .navbar-light .navbar-toggler {
+        color: rgba(0, 160, 139, 1) !important;
+        border-color: rgba(0, 160, 139, 1) !important;
+    }
+
+    .navBar {
+        padding: 0px;
+    }
+}

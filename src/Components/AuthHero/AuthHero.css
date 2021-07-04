@@ -1,0 +1,92 @@
+.auth__hero__outer__div {
+    padding-bottom: 35px;
+}
+
+.auth__hero__outer__div .auth__hero__inner__div {
+    position: relative;
+    z-index: 10;
+    top: -70px;
+    width: 80%;
+    margin: auto;
+
+}
+
+.auth__hero__outer__div .auth__hero__inner__div .description__div {
+    -webkit-box-shadow: 2px -22px 24px -15px rgb(0 0 0 / 75%);
+    -moz-box-shadow: 2px -22px 24px -15px rgb(0 0 0 / 75%);
+    box-shadow: 2px -22px 24px -15px rgb(0 0 0 / 75%);
+    background-color: #fff;
+    padding: 25px;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.auth__hero__outer__div .auth__hero__inner__div .description__div .heading p {
+    color: rgba(0, 160, 139, 1);
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+.auth__hero__outer__div .auth__social__login__row{
+    padding: 0;
+    justify-content: space-between;
+}
+
+.auth__hero__outer__div .auth__social__login{
+    width: 60%;
+    margin:auto;
+}
+
+.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb{
+    text-align: left;
+    padding: 0;
+}
+
+.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl{
+    text-align: right;
+    padding: 0;
+}
+
+.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb button , .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl button{
+    width: 95%;
+    padding: 6px 5px;
+    outline: none;
+    border:none;
+    border-radius:5px;
+    color: white;
+}
+
+.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb button{
+    background-color: #4267B2;
+}
+
+.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl button{background-color: #DB4A39;}
+
+.auth__hero__outer__div .auth__social__login{
+    padding-top: 30px;
+}
+
+.auth__hero__outer__div .auth__social__login .auth__social__login__heading{
+    text-align: center;
+    font-weight: 700;
+    color: grey;
+    font-size: 25px;
+    margin-bottom:20px;
+}
+
+
+
+@media screen and (max-width:600px){
+    .auth__hero__outer__div .auth__hero__inner__div{
+        width: 100%;
+    }
+
+    .auth__hero__outer__div .auth__social__login{width: 100%;}
+
+    .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb{text-align: center;margin-bottom: 10px;}
+
+    .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl{text-align: center;margin-bottom: 10px;}
+    .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb button, .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl button{width: 100%;}
+}

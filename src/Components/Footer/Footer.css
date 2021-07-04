@@ -1,0 +1,50 @@
+.footer__div{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 10px;
+}
+.logo p{
+    color: white;
+    font-size: 30px;
+}
+
+.footer__divider{
+    border-right: 1px solid #fff;
+}
+
+.footer__div .terms, .footer__div .copyright{
+    color: #fff;
+}
+
+@media screen and (max-width:1200px){
+    .footer__div{
+        text-align: center;
+    }
+
+    .footer__divider{border-right:none;}
+
+    .footer__left__div, .footer__left__div{
+        flex:0 0 100% !important;
+        max-width:100% !important;
+    }
+}
+
+@media screen and (max-width:1024px){
+    .footer__div{
+        text-align: center;
+    }
+
+    .footer__divider{border-right:none;}
+
+    .footer__left__div, .footer__left__div{
+        flex:0 0 100% !important;
+        max-width:100% !important;
+    }
+}
+
+@media screen and (max-width:600px){
+    .footer__div{
+        text-align: center;
+    }
+
+    .footer__divider{border-right:none;}
+}
