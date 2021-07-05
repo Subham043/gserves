@@ -9,7 +9,11 @@
     margin-bottom: 10px;
 }
 
-
+@media screen and (max-width:992px) {
+    .login__form__main .auth__hero__outer__div .auth__social__login{
+        width: 80%;
+    }
+}
 
 
 @media screen and (max-width:600px) {

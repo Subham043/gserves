@@ -4,6 +4,31 @@
     width: 40%;
 }
 
+@media screen and (max-width:1024px) {
+    .login__row {
+        width: 60%;
+    }
+
+    .login__row .register__btn__right {
+        text-align: left;
+    }
+
+    .login__row .register__btn__left{
+        text-align: right;
+    }
+
+    
+}
+
+@media screen and (max-width:991px) {
+    .login__row {
+        width: 80%;
+    }
+    .login__row .register__btn{
+        width: 100%;
+    }
+}
+
 @media screen and (max-width:600px) {
     .login__row{
         width: 100%;

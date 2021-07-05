@@ -1,11 +1,9 @@
 import React from 'react';
 import './AuthHero.css';
 import { Container } from 'react-bootstrap';
-import Register from '../Register/RegisterForm';
 import { FaFacebookF, FaGooglePlusG } from "react-icons/fa";
 
 const AuthHero = (props) => {
-    console.log(props.form)
     return (
         <div className="auth__hero__outer__div">
             <Container>

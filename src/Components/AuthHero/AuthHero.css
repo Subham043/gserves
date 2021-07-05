@@ -76,6 +76,12 @@
     margin-bottom:20px;
 }
 
+@media screen and (max-width:992px){
+    .auth__hero__outer__div .auth__social__login {
+        width: 95%;
+    }
+}
+
 
 
 @media screen and (max-width:600px){

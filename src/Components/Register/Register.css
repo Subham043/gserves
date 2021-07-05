@@ -80,14 +80,26 @@
     .register__row{
         width: 100%;
     }
-    .register__row .register__btn__left{text-align: center;margin-bottom:10px;order:2;}
+    .register__row .register__btn__left{text-align: right;margin-bottom:10px;order:2;}
     .register__row .register__btn__center{text-align: center;margin-bottom:10px;order:1;}
-    .register__row .register__btn__right{text-align: center;margin-bottom:10px;order:0;}
+    .register__row .register__btn__right{text-align: left;margin-bottom:10px;order:0;}
 
     .register__row .register__btn{
         width: 90%;
     }
 }
+
+@media screen and (max-width:992px){
+    .register__row .register__btn__left{text-align: center;}
+    .register__row .register__btn__center{text-align: center;}
+    .register__row .register__btn__right{text-align: center;}
+
+    .register__row .register__btn{
+        width: 100%;
+    }
+}
+
+
 
 @media screen and (max-width:600px){
     .register__row{

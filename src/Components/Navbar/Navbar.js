@@ -6,6 +6,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { GoThreeBars } from "react-icons/go";
 import { GoLocation } from "react-icons/go";
 import { GrStackOverflow } from "react-icons/gr";
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -30,9 +31,9 @@ const Navbar = () => {
                                                 <GoThreeBars style={{ color: "rgba(0, 160, 139, 1)" }} /> Services
                                             </button>
                                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a className="dropdown-item" href="#">Action</a>
-                                                <a className="dropdown-item" href="#">Another action</a>
-                                                <a className="dropdown-item" href="#">Something else here</a>
+                                                <Link className="dropdown-item" to="#">Action</Link>
+                                                <Link className="dropdown-item" to="#">Another action</Link>
+                                                <Link className="dropdown-item" to="#">Something else here</Link>
                                             </div>
                                         </div>
 
@@ -49,17 +50,17 @@ const Navbar = () => {
                         <div className="logo__div">
                             <div className="row" style={{ justifyContent: "center" }}>
                                 <div className="logo">
-                                    <p><GrStackOverflow /> GServes</p>
+                                <Link to="/"><p><GrStackOverflow /> GServes</p></Link>
                                 </div>
                             </div>
                         </div>
                         <div className="auth__div">
                             <div className="row" style={{ justifyContent: "space-evenly" }}>
                                 <div className="register_div">
-                                    <button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button>
+                                    <Link to="/register"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
                                 </div>
                                 <div className="login_div">
-                                    <button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button>
+                                <Link to="/login"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
                                 </div>
                             </div>
                         </div>
@@ -67,9 +68,9 @@ const Navbar = () => {
                 </div>
                 <div className="mobile__nav">
                     <div className="navbar navbar-expand-lg navbar-light">
-                        <a className="navbar-brand" href="#"><div className="logo">
+                        <Link className="navbar-brand" to="/"><div className="logo">
                             <p><GrStackOverflow /> GServes</p>
-                        </div></a>
+                        </div></Link>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <GoThreeBars style={{ color: "rgba(0, 160, 139, 1)" }} />
                         </button>
@@ -104,9 +105,9 @@ const Navbar = () => {
                                                     <GoThreeBars style={{ color: "rgba(0, 160, 139, 1)" }} /> Services
                                                 </button>
                                                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a className="dropdown-item" href="#">Action</a>
-                                                    <a className="dropdown-item" href="#">Another action</a>
-                                                    <a className="dropdown-item" href="#">Something else here</a>
+                                                    <Link className="dropdown-item" to="#">Action</Link>
+                                                    <Link className="dropdown-item" to="#">Another action</Link>
+                                                    <Link className="dropdown-item" to="#">Something else here</Link>
                                                 </div>
                                             </div>
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { InputGroup, FormControl } from 'react-bootstrap'
 import { AiOutlineMail, AiOutlineMobile, AiOutlineUser } from "react-icons/ai";
 import { BiMessageCheck } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 import './Register.css';
 
 const RegisterForm = () => {
@@ -60,8 +61,8 @@ const RegisterForm = () => {
             </div>
             <div className="col-xl-12 col-lg-12 col-sm-12 form__row">
                 <div className="row" style={{ width: "100%", justifyContent: "space-between" }}>
-                    <div className="col-xl-4 col-lg-4 col-sm-12 button__row register__btn__left"><button className="register__btn">Cancel</button></div>
-                    <div className="col-xl-4 col-lg-4 col-sm-12 button__row register__btn__center"><button className="register__btn">Sign-in</button></div>
+                    <div className="col-xl-4 col-lg-4 col-sm-12 button__row register__btn__left"><Link to="/"><button className="register__btn">Cancel</button></Link></div>
+                    <div className="col-xl-4 col-lg-4 col-sm-12 button__row register__btn__center"><Link to="/login"><button className="register__btn">Sign-in</button></Link></div>
                     <div className="col-xl-4 col-lg-4 col-sm-12 button__row register__btn__right"><button className="register__btn">Register</button></div>
 
                 </div>
