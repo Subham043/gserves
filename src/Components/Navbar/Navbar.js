@@ -57,10 +57,10 @@ const Navbar = () => {
                         <div className="auth__div">
                             <div className="row" style={{ justifyContent: "space-evenly" }}>
                                 <div className="register_div">
-                                    <Link to="/register"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
+                                    <Link to="/"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
                                 </div>
                                 <div className="login_div">
-                                <Link to="/login"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
+                                <Link to="/"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
                                 </div>
                             </div>
                         </div>
@@ -80,12 +80,12 @@ const Navbar = () => {
 
                                 <li className="nav-item">
                                     <div className="register_div nav-link">
-                                        <Link to="/register"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
+                                        <Link to="/"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
                                     <div className="login_div">
-                                    <Link to="/login"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
+                                    <Link to="/"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
