@@ -80,12 +80,12 @@ const Navbar = () => {
 
                                 <li className="nav-item">
                                     <div className="register_div nav-link">
-                                        <button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button>
+                                        <Link to="/register"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
                                     <div className="login_div">
-                                        <button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button>
+                                    <Link to="/login"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
