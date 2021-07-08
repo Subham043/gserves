@@ -6,13 +6,39 @@ import { FaRegEdit } from "react-icons/fa";
 import { GoThreeBars } from "react-icons/go";
 import { GoLocation } from "react-icons/go";
 import { GrStackOverflow } from "react-icons/gr";
-import {Link} from 'react-router-dom';
+import { BiExit } from "react-icons/bi";
+import { Link, useHistory } from 'react-router-dom';
+import { selectUser, logout } from "../../features/userSlice"
+import { useSelector, useDispatch } from "react-redux"
+import axios from "../../axios"
 
 const Navbar = () => {
 
+    const user = useSelector(selectUser)
 
+    const dispatch = useDispatch();
 
+    let history = useHistory();
 
+    const config = {
+        headers: { Authorization: `Bearer ${user}` }
+    };
+
+    const logoutHandler = () => {
+
+        axios.get(`/api/logout`, config)
+        .then((response) => {
+            
+            if(response.data.result){
+                dispatch(logout())
+                localStorage.removeItem("token");
+                history.push(`/`);
+               
+            }
+            
+        })
+
+    }
 
 
     return (
@@ -50,19 +76,33 @@ const Navbar = () => {
                         <div className="logo__div">
                             <div className="row" style={{ justifyContent: "center" }}>
                                 <div className="logo">
-                                <Link to="/"><p><GrStackOverflow /> GServes</p></Link>
+                                    <Link to="/"><p><GrStackOverflow /> GServes</p></Link>
                                 </div>
                             </div>
                         </div>
                         <div className="auth__div">
-                            <div className="row" style={{ justifyContent: "space-evenly" }}>
-                                <div className="register_div">
-                                    <Link to="/"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
+                            {user === null ?
+                                <div className="row" style={{ justifyContent: "space-evenly" }}>
+
+                                    <div className="register_div">
+                                        <Link to="/register"><button><FaRegEdit style={{ color: "rgba(0, 160, 139, 1)" }} /> Register</button></Link>
+                                    </div>
+                                    <div className="login_div">
+                                        <Link to="/login"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
+                                    </div>
                                 </div>
-                                <div className="login_div">
-                                <Link to="/"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
+                                :
+                                <div className="row" style={{ justifyContent: "space-evenly" }}>
+
+                                    <div className="register_div">
+                                        <Link to="/"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Profile</button></Link>
+                                    </div>
+                                    <div className="login_div">
+                                        <button onClick={logoutHandler}><BiExit style={{ color: "rgba(0, 160, 139, 1)" }} /> Logout</button>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
                         </div>
                     </div>
                 </div>
@@ -85,7 +125,7 @@ const Navbar = () => {
                                 </li>
                                 <li className="nav-item">
                                     <div className="login_div">
-                                    <Link to="/"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
+                                        <Link to="/"><button><FaUserAlt style={{ color: "rgba(0, 160, 139, 1)" }} /> Login</button></Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
