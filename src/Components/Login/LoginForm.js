@@ -7,6 +7,7 @@ import { Link, useHistory } from 'react-router-dom'
 import axios from "../../axios"
 import { useDispatch } from 'react-redux'
 import { login } from '../../features/userSlice'
+import { show, hide } from "../../features/loaderModalSlice"
 
 const LoginForm = () => {
 
@@ -40,6 +41,7 @@ const LoginForm = () => {
                 password: password,
             }
             setShowProgress(true)
+            dispatch(show())
 
 
 
@@ -50,6 +52,7 @@ const LoginForm = () => {
 
                             if (response.data.result) {
                                 setShowProgress(false)
+                                dispatch(hide())
                                 dispatch(login(response.data.result))
                                 localStorage.setItem("token", response.data.result);
                                 history.push(`/`);
@@ -57,7 +60,9 @@ const LoginForm = () => {
                                 setError(true)
                                 setErrorMessage(response.data.error)
                                 setShowProgress(false)
+                                dispatch(hide())
                             }
+                           
                         })
                         .catch(error => {
                             console.log(error)

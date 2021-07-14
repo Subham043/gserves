@@ -7,8 +7,9 @@ import { Link, useParams, useHistory } from 'react-router-dom'
 import axios from "../../axios"
 import { useDispatch } from "react-redux"
 import { show, hide } from "../../features/loaderModalSlice"
+import { login } from '../../features/userSlice'
 
-const OtpForm = () => {
+const SocialOtpForm = () => {
 
     const dispatch = useDispatch();
 
@@ -48,13 +49,19 @@ const OtpForm = () => {
 
             axios.get('/sanctum/csrf-cookie')
                 .then(response => {
-                    axios.post(`/api/verify/${window.atob(email)}`, formData,)
+                    axios.post(`/api/social/verify/${window.atob(email)}`, formData,)
                         .then((response) => {
                             
                             if(response.data.result){
                                 setShowProgress(false)
                                 dispatch(hide())
-                                history.push(`/login`);
+                                if(response.data.result === "User Otp verified and User Verified"){
+                                    dispatch(login(response.data.token))
+                                    localStorage.setItem("token", response.data.token);
+                                    history.push(`/`);
+                                }else if(response.data.result === "illegal email"){
+                                    history.push(`/`);
+                                }
                             }else if(response.data.error){
                                 setError(true)
                                 setErrorMessage(response.data.error)
@@ -140,4 +147,4 @@ const OtpForm = () => {
     )
 }
 
-export default OtpForm
+export default SocialOtpForm

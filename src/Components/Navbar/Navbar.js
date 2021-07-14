@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container } from 'react-bootstrap';
 import "./Navbar.css"
 import { FaUserAlt } from "react-icons/fa";
@@ -9,36 +9,94 @@ import { GrStackOverflow } from "react-icons/gr";
 import { BiExit } from "react-icons/bi";
 import { Link, useHistory } from 'react-router-dom';
 import { selectUser, logout } from "../../features/userSlice"
+import { show, hide } from "../../features/loaderModalSlice"
 import { useSelector, useDispatch } from "react-redux"
 import axios from "../../axios"
+import 'rsuite/dist/styles/rsuite-default.css';
+import { Dropdown } from 'rsuite';
 
 const Navbar = () => {
+
+
 
     const user = useSelector(selectUser)
 
     const dispatch = useDispatch();
 
     let history = useHistory();
-
     const config = {
         headers: { Authorization: `Bearer ${user}` }
     };
 
     const logoutHandler = () => {
-
+        dispatch(show())
         axios.get(`/api/logout`, config)
-        .then((response) => {
-            
-            if(response.data.result){
-                dispatch(logout())
-                localStorage.removeItem("token");
-                history.push(`/`);
-               
-            }
-            
-        })
+            .then((response) => {
+
+                if (response.data.result) {
+                    dispatch(logout())
+                    localStorage.removeItem("token");
+                    dispatch(hide())
+                    history.push(`/`);
+
+                }
+
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
 
     }
+
+    const [navServices, setNavServices] = useState([]);
+
+    useEffect(() => {
+        dispatch(show())
+        axios.get(`/api/service/view`, config)
+            .then((response) => {
+                setNavServices(response.data.result)
+                dispatch(hide())
+            })
+    }, [])
+
+    const [subNavServices, setSubNavServices] = useState([]);
+
+    useEffect(() => {
+        dispatch(show())
+        axios.get(`/api/sub-service/view`, config)
+            .then((response) => {
+                setSubNavServices(response.data.result)
+                dispatch(hide())
+            })
+    }, [])
+
+    
+    let subServ = []
+    let nonSubServ = []
+    let obj = {}
+    for (let i = 0; i < navServices.length; i++) {
+        obj.id = navServices[i].id
+        obj.title = navServices[i].title
+        obj.logo = navServices[i].logo
+        obj.price = navServices[i].price
+        for (let j = 0; j < subNavServices.length; j++) {
+            if (subNavServices[j].service_id === navServices[i].id) {
+                nonSubServ.push(subNavServices[j])
+            }
+        }
+        if (nonSubServ.length !== 0) {
+            obj.sub_services = nonSubServ
+            nonSubServ = [];
+        } else {
+            obj.sub_services = null
+            nonSubServ = [];
+        }
+        subServ.push(obj);
+        obj = {};
+
+    }
+    
+
 
 
     return (
@@ -52,16 +110,27 @@ const Navbar = () => {
                                     <div>
 
 
-                                        <div className="dropdown">
-                                            <button className="dropdown__btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <GoThreeBars style={{ color: "rgba(0, 160, 139, 1)" }} /> Services
-                                            </button>
-                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <Link className="dropdown-item" to="#">Action</Link>
-                                                <Link className="dropdown-item" to="#">Another action</Link>
-                                                <Link className="dropdown-item" to="#">Something else here</Link>
-                                            </div>
-                                        </div>
+
+                                        <Dropdown className="dropdown__btn" title="Services" icon={<GoThreeBars style={{ color: "rgba(0, 160, 139, 1)" }} />} >
+                                            
+                                            {subServ.map(item => {
+                                                if (item.sub_services != null) {
+                                                   
+                                                    return (<Dropdown.Menu title={item.title} key={item.id}>
+                                                        {item.sub_services.map(innerElement => (
+  
+                                                               <Dropdown.Item eventKey="e-1" key={innerElement.id}> {innerElement.name}</Dropdown.Item>
+                                                               
+                                                            
+                                                      ))}</Dropdown.Menu>)
+
+                                                } else {
+                                                    return (<Dropdown.Item eventKey="a" key={item.id}>{item.title}</Dropdown.Item>)
+                                                }
+
+
+                                            })}
+                                        </Dropdown>
 
 
                                     </div>
@@ -141,14 +210,27 @@ const Navbar = () => {
 
 
                                             <div className="dropdown">
-                                                <button className="dropdown__btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <GoThreeBars style={{ color: "rgba(0, 160, 139, 1)" }} /> Services
-                                                </button>
-                                                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <Link className="dropdown-item" to="#">Action</Link>
-                                                    <Link className="dropdown-item" to="#">Another action</Link>
-                                                    <Link className="dropdown-item" to="#">Something else here</Link>
-                                                </div>
+                                               
+                                                <Dropdown className="dropdown__btn" title="Services" icon={<GoThreeBars style={{ color: "rgba(0, 160, 139, 1)" }} />} >
+                                            
+                                            {subServ.map(item => {
+                                                if (item.sub_services != null) {
+                                                   
+                                                    return (<Dropdown.Menu title={item.title} key={item.id}>
+                                                        {item.sub_services.map(innerElement => (
+  
+                                                               <Dropdown.Item eventKey="e-1" key={innerElement.id}> {innerElement.name}</Dropdown.Item>
+                                                               
+                                                            
+                                                      ))}</Dropdown.Menu>)
+
+                                                } else {
+                                                    return (<Dropdown.Item eventKey="a" key={item.id}>{item.title}</Dropdown.Item>)
+                                                }
+
+
+                                            })}
+                                        </Dropdown>
                                             </div>
 
 

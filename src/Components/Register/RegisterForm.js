@@ -4,10 +4,12 @@ import { AiOutlineMail, AiOutlineMobile, AiOutlineUser } from "react-icons/ai";
 import { Link, useHistory } from 'react-router-dom';
 import './Register.css';
 import axios from '../../axios'
+import { useDispatch } from "react-redux"
+import { show, hide } from "../../features/loaderModalSlice"
 
 const RegisterForm = () => {
 
-
+    const dispatch = useDispatch();
 
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -17,6 +19,8 @@ const RegisterForm = () => {
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [showProgress, setShowProgress] = useState(false)
+
+
 
 
 
@@ -38,6 +42,7 @@ const RegisterForm = () => {
                 email: email
             }
             setShowProgress(true)
+            dispatch(show())
 
 
 
@@ -48,15 +53,42 @@ const RegisterForm = () => {
 
                             if (response.data.result) {
                                 setShowProgress(false)
-                                history.push(`/otp/${response.data.email}`);
+                                dispatch(hide())
+                                history.push(`/otp/${window.btoa(response.data.email)}`);
                             } else if (response.data.error) {
                                 setShowProgress(false)
+                                dispatch(hide())
                                 setError(true)
                                 setErrorMessage(response.data.error)
+                            }
+                            else if (response.data.first_name) {
+                                setShowProgress(false)
+                                dispatch(hide())
+                                setError(true)
+                                setErrorMessage(response.data.first_name)
+                            }
+                            else if (response.data.last_name) {
+                                setShowProgress(false)
+                                dispatch(hide())
+                                setError(true)
+                                setErrorMessage(response.data.last_name)
+                            }
+                            else if (response.data.email) {
+                                setShowProgress(false)
+                                dispatch(hide())
+                                setError(true)
+                                setErrorMessage(response.data.email)
+                            }
+                            else if (response.data.phone) {
+                                setShowProgress(false)
+                                dispatch(hide())
+                                setError(true)
+                                setErrorMessage(response.data.phone)
                             }
                         })
                         .catch(error => {
                             setShowProgress(false)
+                            dispatch(hide())
                             console.log(error)
                         })
                 });

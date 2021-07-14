@@ -57,8 +57,16 @@
     border-radius:5px;
     color: white;
 }
+.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb .my-facebook-button-class {
+    width: 95%;
+    padding: 6px 5px;
+    outline: none;
+    border:none;
+    border-radius:5px;
+    color: white;
+}
 
-.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb button{
+.auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb .my-facebook-button-class{
     background-color: #4267B2;
 }
 
@@ -94,5 +102,5 @@
     .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb{text-align: center;margin-bottom: 10px;}
 
     .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl{text-align: center;margin-bottom: 10px;}
-    .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb button, .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl button{width: 100%;}
+    .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__fb .my-facebook-button-class, .auth__hero__outer__div .auth__social__login__row .auth__social__login__div__gl button{width: 100%;}
 }
