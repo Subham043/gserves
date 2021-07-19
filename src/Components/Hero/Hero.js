@@ -14,8 +14,7 @@ import employee from "../../Assets/icons/employee.png"
 
 const Hero = () => {
 
-
-
+    
     return (
         <div className="hero__outer__div">
             <Container>

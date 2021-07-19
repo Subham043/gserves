@@ -57,6 +57,10 @@ const Navbar = () => {
                 setNavServices(response.data.result)
                 dispatch(hide())
             })
+            .catch((error)=>{
+                console.log(error)
+                dispatch(hide())
+            })
     }, [])
 
     const [subNavServices, setSubNavServices] = useState([]);
@@ -66,6 +70,10 @@ const Navbar = () => {
         axios.get(`/api/sub-service/view`, config)
             .then((response) => {
                 setSubNavServices(response.data.result)
+                dispatch(hide())
+            })
+            .catch((error)=>{
+                console.log(error)
                 dispatch(hide())
             })
     }, [])

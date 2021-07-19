@@ -9,6 +9,7 @@ import SocialOtp from './Pages/SocialOtp/SocialOtp';
 import { selectUser, login } from "./features/userSlice"
 import { useSelector, useDispatch } from "react-redux"
 import LoadingModal from './Components/LodaingModal/LoadingModal'
+import ServiceModal from './Components/ServiceModal/ServiceModal'
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
         
       </Switch>
       <LoadingModal />
+      <ServiceModal />
     </Router>
   );
 }

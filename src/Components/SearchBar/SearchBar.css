@@ -3,12 +3,14 @@
 }
 .search__input__div .search__input{
     display: inline-block;
-    width:60%;
+    width:90%;
     padding:15px;
     outline: none;
     border: none;
     border-bottom-left-radius: 5px;
     border-top-left-radius: 5px;
+    position: relative;
+    z-index: 26;
 }
 
 .search__input__div .seacrh__btn{
@@ -21,4 +23,44 @@
     border-top-right-radius: 5px;
     background-color: rgba(0, 160, 139, 1);
     color: white;
+}
+
+.shadow__bottom{
+    -webkit-box-shadow: 0 8px 6px -6px black;
+       -moz-box-shadow: 0 8px 6px -6px black;
+            box-shadow: 0 8px 6px -6px black;
+            z-index: 30;
+}
+
+.suggestion__div_container{
+    position: absolute;
+    width: 100%;
+    top:50px;
+    z-index: 25;
+}
+
+.suggestion__div_container .suggestion__div{
+    background-color:white;
+    width: 90%;
+    padding: 0 15px;
+    padding-top:20px;
+    transition: 0.3s all linear;
+}
+
+.suggestion__div_container .suggestion__div p{
+    border-bottom: 1px solid #eee;
+    margin-bottom: 0 !important;
+    padding-bottom:10px;
+    color:#000 !important;
+}
+
+.suggestion__div_container .suggestion__div:hover{
+    background-color:#eee;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1024px){
+    .suggestion__div_container .suggestion__div {
+        width: 80%;
+    }
 }
