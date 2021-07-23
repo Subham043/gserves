@@ -7,13 +7,19 @@ import Otp from './Pages/Otp/Otp';
 import Phone from './Pages/Phone/Phone';
 import SocialOtp from './Pages/SocialOtp/SocialOtp';
 import { selectUser, login } from "./features/userSlice"
+import { selectAdminUser, loginAdmin } from "./features/adminUserSlice"
 import { useSelector, useDispatch } from "react-redux"
 import LoadingModal from './Components/LodaingModal/LoadingModal'
 import ServiceModal from './Components/ServiceModal/ServiceModal'
+import AdminLogin from './Pages/AdminLogin/AdminLogin'
+import AdminResetPassword from './Pages/AdminResetPassword/AdminResetPassword'
+import AdminDashboard from './Pages/AdminDashboard/AdminDashboard'
+import AdminServiceDashboard from './Pages/AdminServiceDashboard/AdminServiceDashboard'
 
 function App() {
 
   const user = useSelector(selectUser)
+  const adminUser = useSelector(selectAdminUser)
   const dispatch = useDispatch();
 
   useEffect(()=>{
@@ -21,7 +27,14 @@ function App() {
     if(user!==null){
       dispatch(login(user))
     }
-  });
+  }, [user]);
+
+  useEffect(()=>{
+    let adminUser = localStorage.getItem("admin_token");
+    if(adminUser!==null){
+      dispatch(loginAdmin(adminUser))
+    }
+  }, [adminUser]);
 
   return (
     <Router>
@@ -42,6 +55,18 @@ function App() {
         </Route>
         <Route path="/social/otp/:email" exact >
           {user!==null ? <Redirect to="/" /> : <SocialOtp />}
+        </Route>
+        <Route path="/admin" exact >
+          {adminUser===null ? <AdminLogin /> : <Redirect to="/admin/dashboard" />}
+        </Route>
+        <Route path="/admin/reset-password/:email" exact >
+          {adminUser===null ? <AdminResetPassword /> : <Redirect to="/admin/dashboard" />}
+        </Route>
+        <Route path="/admin/dashboard" exact >
+          {adminUser!==null ? <AdminDashboard /> : <Redirect to="/admin" />}
+        </Route>
+        <Route path="/admin/service/:type" exact >
+          {adminUser!==null ? <AdminServiceDashboard /> : <Redirect to="/admin" />}
         </Route>
         
       </Switch>

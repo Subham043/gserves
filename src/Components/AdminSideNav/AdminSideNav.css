@@ -1,0 +1,93 @@
+.admin__left__side__nav{
+    flex: 0 0 auto;
+    width: 16%;
+    height:100vh;
+    background:rgba(0, 0, 0, 0.8);
+    padding-top:90px;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu ul{
+    margin: 0;
+    padding: 0;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu ul li{
+    list-style: none;
+    padding: 10px 5px;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu ul li .active__class__handler{
+    width:100%;
+    padding:5px 10px;
+    text-align:left;
+    background-color: transparent;
+    color:rgba(0, 160, 139, 1);
+    display: block;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu ul li .active__class__handler.active{
+    background-color: rgba(0, 160, 139, 1);
+    color:white;
+    transition: all 0.3s ease-in-out;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu ul li .active__class__handler:hover{
+    background-color: rgba(0, 160, 139, 1);
+    color:white;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu .sub__menu__side__nav__ul{
+    padding:0px 10px;
+    display: block;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu .sub__menu__side__nav__ul::before{
+    content: "";
+    height: 100%;
+    background: #ccc;
+    width: 1px;
+    position: absolute;
+    left: 10px;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu .sub__menu__side__nav__ul .sub__menu__side__nav__li{
+    display:block;
+    position: relative;
+}
+
+.sub__menu__side__nav__li .sub__menu__side__nav__button{
+    background-color: transparent !important;
+    color: rgba(0, 160, 139, 1) !important;
+    width:100%;
+    padding:5px 10px;
+    text-align:left;
+    display:block;
+}
+
+.sub__menu__side__nav__li .sub__menu__side__nav__button:hover{
+    background-color: transparent !important;
+    color: rgba(0, 160, 139, 1) !important;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu .sub__menu__side__nav__ul .sub__menu__side__nav__li:hover::before{
+    content: "";
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    background:rgba(0, 160, 139, 1);
+    position: absolute;
+    left: -4px;
+    top:20px;
+}
+
+.admin__left__side__nav .admin__left__side__nav__menu .sub__menu__side__nav__ul .ball__line::before{
+    content: "";
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    background:rgba(0, 160, 139, 1);
+    position: absolute;
+    left: -4px;
+    top:20px;
+}
+

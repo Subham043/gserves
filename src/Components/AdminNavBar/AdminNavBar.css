@@ -1,0 +1,84 @@
+.admin__navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    padding:10px;
+    background-color:rgba(0, 0, 0, 0.8);
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.admin__navbar .left__Nav{
+    width:15%;
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.admin__navbar .left__Nav .nav__button button{
+    background-color: transparent;
+    outline:none;
+    border:none;
+    font-size: 25px;
+}
+
+.admin__navbar .left__Nav .nav__logo .logo__div{
+    width:100%;
+}
+
+.admin__navbar .left__Nav .nav__logo .logo p{
+    color: #fff;
+    font-size: 25px;
+    margin-bottom: 0;
+}
+
+.admin__navbar .Right__Nav .nav__right__drop__down button{
+    width: 50px;
+    height:50px;
+    background:white;
+    border-radius:50%;
+    padding:5px;
+
+}
+
+.admin__navbar .Right__Nav .nav__right__drop__down .btn__img{
+    width:85%;
+}
+
+.admin__navbar .Right__Nav .nav__right__drop__down{position: relative;}
+
+.admin__navbar .Right__Nav .nav__right__drop__down .dropdown_menu_admin ul{
+    margin: 0;
+    padding: 0;
+}
+
+.admin__navbar .Right__Nav .nav__right__drop__down .dropdown_menu_admin ul li{list-style: none;padding: 10px 5px;}
+
+.admin__navbar .Right__Nav .nav__right__drop__down .dropdown_menu_admin ul li:hover{background:#eee;cursor: pointer;}
+
+.admin__navbar .Right__Nav .nav__right__drop__down .dropdown_menu_admin{
+    background-color: whitesmoke;
+    width:140px;
+    position: absolute;
+    top: 65px;
+    right: 7px;
+    padding: 5px;
+    box-shadow: -11px -11px 35px 0 rgba(0, 0, 0, 0.25);
+    z-index: 20;
+}
+
+.admin__navbar .Right__Nav .nav__right__drop__down .dropdown_menu_admin::before{
+    content: '';
+    display: block;
+    border-bottom: 15px solid whitesmoke;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent;
+    background: transparent;
+    position: absolute;
+    top: -15px;
+    right: 0;
+    z-index: 20;
+    box-shadow: -11px -11px 35px 0 rgba(0, 0, 0, 0.25);
+}

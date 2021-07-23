@@ -29,7 +29,7 @@ const ServiceModal = () => {
             {serviceModal === true ?
 
             <div className="service__modal__div">
-                <div className="inner__service__modal__div">
+                <div id="modal_div" className={`${serviceModal === true ? "inner__service__modal__div inner__service__modal__div__show" : "inner__service__modal__div inner__service__modal__div__hide"}`}>
                     <div className="close__button__div">
                         <button onClick={handleCloseServiceModal}><AiOutlineClose /></button>
                     </div>

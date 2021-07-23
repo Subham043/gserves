@@ -187,20 +187,7 @@ const SimpleSlider = () => {
                 })}
 
             </Slider>
-            {/* {sliderItems.map((item, i) => {
-                return (<div key={item.id} className="service__slider__inner__div_hover_div" id={`service__slider__inner__div_hover_div${i}`} style={{ display: "none" }} onMouseEnter={() => sliderMouseEnterHandler(i)} onMouseLeave={() => sliderMouseLeaveHandler(i)}>
-                    <div className="row">
-
-                        <div className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-                            <div className="service__slider__inner__div_hover_div_text">
-                                <p>Hello</p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>)
-
-            })} */}
+            
 
             {
                 subServ.map((item, i) => {
