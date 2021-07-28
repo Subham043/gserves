@@ -8,6 +8,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { show, hide } from "../../features/loaderModalSlice"
 import axios from "../../axios"
 import { useDispatch } from 'react-redux'
+import { toastStart, toastEnd } from "../../features/toasterSlice"
 
 const AdminResetPassword = () => {
 
@@ -54,6 +55,14 @@ const AdminResetPassword = () => {
                             if(response.data.result){
                                 setShowProgress(false)
                                 dispatch(hide())
+                                dispatch(toastEnd())
+                                dispatch(toastStart({
+                                    toasterStatus: true,
+                                    toasterMessage: "Password Reset Successfully",
+                                    toasterType: "success",
+                                    timeline: Date().toLocaleString()
+                                }))
+                                dispatch(toastEnd())
                                 history.push(`/admin`);
                             }else if(response.data.error){
                                 setError(true)
@@ -78,6 +87,14 @@ const AdminResetPassword = () => {
                             console.log(error)
                             setShowProgress(false)
                             dispatch(hide())
+                            dispatch(toastEnd())
+                            dispatch(toastStart({
+                                toasterStatus: true,
+                                toasterMessage: "Oops! some error occurred",
+                                toasterType: "error",
+                                timeline: Date().toLocaleString()
+                            }))
+                            dispatch(toastEnd())
                         })
                 });
 

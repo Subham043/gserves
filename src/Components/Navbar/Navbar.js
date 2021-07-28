@@ -34,9 +34,10 @@ const Navbar = () => {
             .then((response) => {
 
                 if (response.data.result) {
-                    dispatch(logout())
+                    
                     localStorage.removeItem("token");
                     dispatch(hide())
+                    dispatch(logout())
                     history.push(`/`);
 
                 }
@@ -44,6 +45,7 @@ const Navbar = () => {
             })
             .catch((error)=>{
                 console.log(error)
+                dispatch(hide())
             })
 
     }

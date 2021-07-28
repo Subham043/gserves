@@ -2,22 +2,68 @@ import React, { useState } from 'react'
 import './AdminNavBar.css'
 import { GrStackOverflow } from "react-icons/gr";
 import { GoThreeBars } from "react-icons/go";
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import admin from '../../Assets/admin.png'
 import { AiFillSetting } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FiLogOut } from "react-icons/fi";
 import { showNav } from "../../features/adminNavSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from 'react-redux'
+import { selectAdminUser, loginAdmin, logoutAdmin } from "../../features/adminUserSlice"
+import { toastStart, toastEnd } from "../../features/toasterSlice"
+import axios from "../../axios"
+import { show, hide } from "../../features/loaderModalSlice"
 
 const AdminNavBar = () => {
 
     const [showAdminRightMenu, setShowAdminRightMenu] = useState(false);
 
     const dispatch = useDispatch();
+    let history = useHistory();
 
     const showSideNavHandler = () => {
         dispatch(showNav())
+    }
+
+    const adminUser = useSelector(selectAdminUser)
+    const config = {
+        headers: { Authorization: `Bearer ${adminUser}` }
+    };
+
+    const logoutHandler = () => {
+        dispatch(show())
+        axios.get(`/api/logout`, config)
+            .then((response) => {
+
+                if (response.data.result) {
+                    localStorage.removeItem(window.btoa("admin_token"));
+                    dispatch(hide())
+                    dispatch(logoutAdmin())
+                    dispatch(toastEnd())
+                    dispatch(toastStart({
+                        toasterStatus: true,
+                        toasterMessage: "Successfully Loggedout",
+                        toasterType: "success",
+                        timeline: Date().toLocaleString()
+                    }))
+                    dispatch(toastEnd())
+                    history.push(`/admin`);
+
+                }
+
+            })
+            .catch((error)=>{
+                console.log(error)
+                dispatch(hide())
+                dispatch(toastEnd())
+                dispatch(toastStart({
+                    toasterStatus: true,
+                    toasterMessage: "Oops! some error occured",
+                    toasterType: "error",
+                    timeline: Date().toLocaleString()
+                }))
+                dispatch(toastEnd())
+            })
     }
 
     
@@ -47,7 +93,7 @@ const AdminNavBar = () => {
                                 <ul>
                                     <li><AiFillSetting /> Setting</li>
                                     <li><CgProfile /> Profile</li>
-                                    <li><FiLogOut /> Logout</li>
+                                    <li onClick={logoutHandler}><FiLogOut /> Logout</li>
                                 </ul>
                             </div>
                             : null

@@ -1,0 +1,120 @@
+.main__service__outer__div .main__service__inner__div{
+    width:85%;
+    margin:auto;
+    padding:35px 0;
+}
+
+.main__service__outer__div .main__service__inner__div .heading__main__service{
+    font-weight:700;
+    font-size: 27px;
+    color:rgba(0, 160, 139, 1);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.main__service__outer__div .main__service__inner__div .description__main__service{
+    line-height:1.8;
+    text-align:center;
+    margin-bottom: 20px;
+}
+
+.main__service__outer__div .main__service__inner__div .tag__line__main__service{
+    text-align:center;
+    border-top:1px solid rgba(0, 160, 139, 1);
+    border-bottom:1px solid rgba(0, 160, 139, 1);
+    margin:auto;
+    width: calc(100% - 35%);
+    padding:10px 0;
+    margin-bottom: 20px;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div{
+    width:100%;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div{
+    margin:auto;
+    width:80%;
+    box-shadow:4px -1px 16px 0 rgb(204 204 204);
+    padding:15px;
+    height:175px;
+    max-height: 175px;
+    overflow:auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .visible__pointer__div img{
+    width:65%;
+    display:block;
+    margin: auto;
+    margin-bottom:20px;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .visible__pointer__div .text{
+    text-align:center;
+    font-weight: 700;
+}
+
+.main__service__outer__div .main__service__inner__div .start__application__btn{
+    text-align:center;
+    margin-top:70px;
+}
+
+.main__service__outer__div .main__service__inner__div .start__application__btn a{
+    background-color: #ff6600;
+    color: #fff;
+    padding:12px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .hover__pointer__div{
+    display:grid;
+    place-items: center;
+    display:none;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .hover__pointer__div .text{
+    color: #fff;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .hover__pointer__div .list ul{
+    display:block;
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .hover__pointer__div .list ul li p{
+    margin:0;
+    color:#fff;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .hover__pointer__div .list ul li{
+    display: block;
+    border-top:1px solid #fff;
+    padding:5px 0;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .hover__pointer__div .list ul .last__li{border-bottom:1px solid #fff;}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div .hover__pointer__div .list ul li p.active {
+    background-color: white;
+    color:#000;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div::-webkit-scrollbar {
+    width:7px;
+}
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div::-webkit-scrollbar-thumb {
+    background-color: white;
+    outline: 1px solid white;
+}
+
+.main__service__outer__div .main__service__inner__div .pointers__main__service__div .pointers__div .pointers__inner__div::-webkit-scrollbar-track {
+box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}

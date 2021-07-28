@@ -1,7 +1,7 @@
 .admin__left__side__nav{
     flex: 0 0 auto;
     width: 16%;
-    height:100vh;
+    min-height:100vh;
     background:rgba(0, 0, 0, 0.8);
     padding-top:90px;
 }

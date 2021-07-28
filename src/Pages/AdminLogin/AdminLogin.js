@@ -9,6 +9,7 @@ import { show, hide } from "../../features/loaderModalSlice"
 import axios from "../../axios"
 import { useDispatch } from 'react-redux'
 import {loginAdmin} from '../../features/adminUserSlice'
+import { toastStart, toastEnd } from "../../features/toasterSlice"
 
 const AdminLogin = () => {
 
@@ -52,8 +53,21 @@ const AdminLogin = () => {
                                 setShowProgress(false)
                                 dispatch(hide())
                                 dispatch(loginAdmin(response.data.result))
-                                localStorage.setItem("admin_token", response.data.result);
-                                history.push(`/admin/dashboard`);
+                                localStorage.setItem(window.btoa("admin_token"), window.btoa(response.data.result));
+                                let adminUserToken = window.atob(localStorage.getItem(window.btoa("admin_token")));
+                                if(adminUserToken!==null){
+                                    history.push(`/admin/dashboard`);
+                                    window.location.reload();
+                                }
+                                dispatch(toastEnd())
+                                dispatch(toastStart({
+                                    toasterStatus: true,
+                                    toasterMessage: "Successfully Logged In",
+                                    toasterType: "success",
+                                    timeline: Date().toLocaleString()
+                                }))
+                                dispatch(toastEnd())
+                                
                             } else if(response.data.email){
                                 setError(true)
                                 setErrorMessage(response.data.email)
@@ -75,6 +89,14 @@ const AdminLogin = () => {
                         .catch(error => {
                             console.log(error)
                             setShowProgress(false)
+                            dispatch(toastEnd())
+                            dispatch(toastStart({
+                                toasterStatus: true,
+                                toasterMessage: "Oops! some error occurred",
+                                toasterType: "error",
+                                timeline: Date().toLocaleString()
+                            }))
+                            dispatch(toastEnd())
                         })
                 });
 
@@ -112,6 +134,14 @@ const AdminLogin = () => {
                             if(response.data.verified_email){
                                 setShowProgress(false)
                                 dispatch(hide())
+                                dispatch(toastEnd())
+                                dispatch(toastStart({
+                                    toasterStatus: true,
+                                    toasterMessage: "Check Email for OTP",
+                                    toasterType: "success",
+                                    timeline: Date().toLocaleString()
+                                }))
+                                dispatch(toastEnd())
                                 history.push(`/admin/reset-password/${window.btoa(response.data.verified_email)}`);
                                 
                             }else if(response.data.error){
@@ -132,6 +162,14 @@ const AdminLogin = () => {
                             console.log(error)
                             setShowProgress(false)
                             dispatch(hide())
+                            dispatch(toastEnd())
+                            dispatch(toastStart({
+                                toasterStatus: true,
+                                toasterMessage: "Oops! some error occurred",
+                                toasterType: "error",
+                                timeline: Date().toLocaleString()
+                            }))
+                            dispatch(toastEnd())
                         })
                 });
 

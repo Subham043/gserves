@@ -1,0 +1,101 @@
+.admin__right__main__service__view .card-img-top{
+    width:35%;
+    display:block;
+    margin-left:auto;margin-right:auto;
+}
+
+.admin__right__main__service__view .card-body .card-title{
+    text-align: center;
+    color:rgba(0, 160, 139, 1);
+}
+
+.admin__right__main__service__view .card-body .card__btn{
+    background-color:rgba(0, 160, 139, 1);
+    border-color:rgba(0, 160, 139, 1);
+    margin-right:5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.admin__right__main__service__view .card-body .card__btn:hover{
+    background-color:rgba(0, 160, 139, 0.8);
+    box-shadow: -5px 12px 8px 0 rgb(0 0 0 / 25%);
+}
+
+.admin__right__main__service__view .card{
+    box-shadow: -5px 12px 8px 0 rgb(0 0 0 / 25%);
+    transition: all 0.3s ease-in-out;
+}
+
+.admin__right__main__service__view .card:hover{
+    transform: scale(1.03, 1.03);
+}
+
+.admin__right__main__service__view .card-body .card-text{
+    text-align: center;
+}
+
+.admin__right__main__service__view .create__btn__div{
+    padding: 15px;
+    display: flex;
+    justify-content:flex-end;
+}
+
+.admin__right__main__service__view .create__btn__div .card__btn{
+    background-color:rgba(0, 160, 139, 1);
+    border-color:rgba(0, 160, 139, 1);
+    margin-right:5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.admin__right__main__service__view .create__btn__div .card__btn:hover{
+    background-color:rgba(0, 160, 139, 0.7);
+    box-shadow: -5px 12px 8px 0 rgb(0 0 0 / 25%);
+}
+
+
+
+.admin__right__main__service__view .table{
+    min-width: 100%;
+    overflow-x: scroll;
+}
+
+.admin__right__main__service__view .action__button{
+    border-radius: 5px;
+    text-align: center;
+    margin:5px;
+    padding: 15px;
+    font-size: 18px;
+    line-height:0;
+    display:inline-block;
+}
+
+.admin__right__main__service__view .action__edit{
+    background:rgba(24, 24, 252, 1);
+    color:white;
+}
+
+.admin__right__main__service__view .action__edit:hover{
+    background:rgba(24, 24, 252, 0.8);
+}
+
+.admin__right__main__service__view .action__delete{
+    background:rgba(250, 5, 5, 1);
+    color:white;
+}
+
+.admin__right__main__service__view .action__delete:hover{
+    background:rgba(250, 5, 5, 0.8);
+}
+
+.admin__right__main__service__view .action__view{
+    background:rgba(197, 6, 197, 1);
+    color:white;
+}
+
+.admin__right__main__service__view .action__view:hover{
+    background:rgba(197, 6, 197, 0.8);
+}
+
+.admin__right__main__service__view .action__view svg path{
+    stroke: white;
+}

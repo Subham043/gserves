@@ -2,9 +2,10 @@ import React from 'react'
 import AdminNavBar from '../../Components/AdminNavBar/AdminNavBar'
 import AdminSideNav from '../../Components/AdminSideNav/AdminSideNav'
 import AdminRightMain from '../../Components/AdminRightMain/AdminRightMain'
-import AdminServiceView from '../../Components/AdminServiceView/AdminServiceView'
-import AdminServiceCreate from '../../Components/AdminServiceCreate/AdminServiceCreate'
-import AdminServiceEdit from '../../Components/AdminServiceEdit/AdminServiceEdit'
+import AdminSubServiceView from '../../Components/AdminSubServiceView/AdminSubServiceView'
+import AdminSubServiceCreate from '../../Components/AdminSubServiceCreate/AdminSubServiceCreate'
+import AdminSubServiceEdit from '../../Components/AdminSubServiceEdit/AdminSubServiceEdit'
+import AdminSubServiceDisplay from '../../Components/AdminSubServiceDisplay/AdminSubServiceDisplay'
 import {useParams} from 'react-router-dom';
 
 const AdminServiceDashboard = () => {
@@ -15,11 +16,13 @@ const AdminServiceDashboard = () => {
 
     const serviceViewiewHandler = () => {
         if(type==="create"){
-            return (<AdminServiceCreate />);
+            return (<AdminSubServiceCreate />);
         }else if(type==="view"){
-            return (<AdminServiceView />);
+            return (<AdminSubServiceView />);
         }else if(type==="edit"){
-            return (<AdminServiceEdit />);
+            return (<AdminSubServiceEdit />);
+        }else if(type==="display"){
+            return (<AdminSubServiceDisplay />);
         }
     }
 
@@ -27,13 +30,12 @@ const AdminServiceDashboard = () => {
         <div>
             <AdminNavBar />
             <div className="row" style={{ width: "100%" }}>
-                <AdminSideNav activeClass="service" activeSubClass={type} />
+                <AdminSideNav activeClass="sub-service" activeSubClass={type} />
                 <AdminRightMain>
                     {/* Dynamic Main Board View*/}
                     
                     {serviceViewiewHandler()}
                 </AdminRightMain>
-                
             </div>
 
         </div>
