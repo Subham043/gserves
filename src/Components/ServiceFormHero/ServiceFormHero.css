@@ -1,0 +1,32 @@
+.service__form__hero__outer__div {
+    position: relative;
+    width: 100%;
+}
+
+.service__form__hero__outer__div .service__form__hero__inner__div {
+    position: relative;
+    z-index: 10;
+    top: -70px;
+    width: 80%;
+    margin: auto;
+
+}
+
+.service__form__hero__outer__div .service__form__hero__inner__div .description__div {
+    -webkit-box-shadow: 2px -22px 24px -15px rgb(0 0 0 / 75%);
+    -moz-box-shadow: 2px -22px 24px -15px rgb(0 0 0 / 75%);
+    box-shadow: 2px -22px 24px -15px rgb(0 0 0 / 75%);
+    background-color: #fff;
+    padding: 25px;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.service__form__hero__outer__div .service__form__hero__inner__div .description__div .heading p {
+    color: rgba(0, 160, 139, 1);
+    font-weight: 700;
+    font-size: 30px;
+    text-transform: uppercase;
+}
+

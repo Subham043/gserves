@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux"
 import axios from "../../axios"
 import 'rsuite/dist/styles/rsuite-default.css';
 import { Dropdown } from 'rsuite';
+import { toastStart, toastEnd } from "../../features/toasterSlice"
 
 const Navbar = () => {
 
@@ -35,9 +36,17 @@ const Navbar = () => {
 
                 if (response.data.result) {
                     
-                    localStorage.removeItem("token");
+                    localStorage.removeItem(window.btoa("token"));
                     dispatch(hide())
                     dispatch(logout())
+                    dispatch(toastEnd())
+                    dispatch(toastStart({
+                        toasterStatus: true,
+                        toasterMessage: "Successfully Loggedout",
+                        toasterType: "success",
+                        timeline: Date().toLocaleString()
+                    }))
+                    dispatch(toastEnd())
                     history.push(`/`);
 
                 }

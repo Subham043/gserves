@@ -5,7 +5,7 @@ import { show, hide } from "../../features/loaderModalSlice"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAdminUser } from "../../features/adminUserSlice"
 import { Link, useParams } from 'react-router-dom'
-import { AiFillEdit, AiFillDelete } from "react-icons/ai";
+import { AiFillEdit, AiFillDelete, AiOutlineForm } from "react-icons/ai";
 import { GrView } from "react-icons/gr";
 import { toastStart, toastEnd } from "../../features/toasterSlice"
 
@@ -124,7 +124,7 @@ const AdminSubServiceView = () => {
                                         return (
                                             <tr key={item.id}>
                                                 <th scope="row">{index}</th>
-                                                <td><Link to={`/admin/sub-service/display/${item.id}`} className="action__button action__view" title="view"><GrView /></Link> <Link to={`/admin/sub-service/edit/${item.id}`} className="action__button action__edit" title="edit"><AiFillEdit /></Link> <button type="button" onClick={() => deleteHandler(item.id)} title="delete" className="action__button action__delete"><AiFillDelete /></button></td>
+                                                <td><Link to={`/admin/sub-service/display/${item.id}`} className="action__button action__view" title="view"><GrView /></Link> <Link to={`/admin/sub-service/edit/${item.id}`} className="action__button action__edit" title="edit"><AiFillEdit /></Link> <button type="button" onClick={() => deleteHandler(item.id)} title="delete" className="action__button action__delete"><AiFillDelete /></button> <Link to={`/admin/sub-service/fields/${item.id}`} className="action__button action__field" title="add fields"><AiOutlineForm /></Link></td>
                                                 <td>{item.name}</td>
                                                 <td>{item.city_name}</td>
                                                 <td>{item.tracking_url}</td>

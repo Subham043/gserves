@@ -2,10 +2,10 @@ import React from 'react'
 import AdminNavBar from '../../Components/AdminNavBar/AdminNavBar'
 import AdminSideNav from '../../Components/AdminSideNav/AdminSideNav'
 import AdminRightMain from '../../Components/AdminRightMain/AdminRightMain'
-import AdminSubServiceViewField from '../../Components/AdminSubServiceViewField/AdminSubServiceViewField'
+import AdminCityView from '../../Components/AdminCityView/AdminCityView'
 import {useParams} from 'react-router-dom';
 
-const AdminSubServiceFieldDashboard = () => {
+const AdminCityDashboard = () => {
 
 
 
@@ -17,10 +17,10 @@ const AdminSubServiceFieldDashboard = () => {
         <div>
             <AdminNavBar />
             <div className="row" style={{ width: "100%" }}>
-                <AdminSideNav activeClass="form-field" />
+                <AdminSideNav activeClass="city" />
                 <AdminRightMain>
                     {/* Dynamic Main Board View*/}
-                    <AdminSubServiceViewField />
+                    <AdminCityView />
                     
                 </AdminRightMain>
             </div>
@@ -29,4 +29,4 @@ const AdminSubServiceFieldDashboard = () => {
     )
 }
 
-export default AdminSubServiceFieldDashboard
+export default AdminCityDashboard

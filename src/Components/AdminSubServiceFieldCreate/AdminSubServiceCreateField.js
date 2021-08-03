@@ -16,8 +16,6 @@ const AdminSubServiceCreateField = () => {
     const [errorMessage, setErrorMessage] = useState("")
     const [field_type, setField_type] = useState("email");
     const [field_name, setField_name] = useState("");
-    const [navServices, setNavServices] = useState([]);
-    const [subServiceId, setSubServiceId] = useState([]);
 
 
     const fieldNameHandler = (e) => {
@@ -28,9 +26,6 @@ const AdminSubServiceCreateField = () => {
         setField_type(e.target.value)
     }
 
-    const subServiceIdHandler = (e) => {
-        setSubServiceId(e.target.value)
-    }
 
 
 
@@ -38,19 +33,6 @@ const AdminSubServiceCreateField = () => {
         headers: { Authorization: `Bearer ${adminUser}` }
     };
 
-    useEffect(() => {
-        dispatch(show())
-        axios.get(`/api/sub-service/view`)
-            .then((response) => {
-                setSubServiceId(response.data.result[0].id)
-                setNavServices(response.data.result)
-                dispatch(hide())
-            })
-            .catch((error) => {
-                console.log(error)
-                dispatch(hide())
-            })
-    }, [dispatch])
 
 
 
@@ -73,7 +55,7 @@ const AdminSubServiceCreateField = () => {
 
             axios.get('/sanctum/csrf-cookie')
                 .then(response => {
-                    axios.post(`/api/sub-service-fields/create/${sub_service_id === undefined ? subServiceId : sub_service_id}`, formData, config)
+                    axios.post(`/api/form-field/create/`, formData, config)
                         .then((response) => {
 
                             if (response.data.result) {
@@ -131,10 +113,10 @@ const AdminSubServiceCreateField = () => {
         <div className="admin__right__main__service__create">
 
             <div className="row" style={{ width: "100%", justifyContent: "center" }}>
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <div className="admin__right__main__service__create__form">
+                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    {/* <div className="admin__right__main__service__create__form">
                         <h2>CREATE FORM FIELD</h2>
-                    </div>
+                    </div> */}
                     <div className="card form__card" style={{ width: "100%" }}>
                         <form style={{ width: "100%" }} encType="multipart/form-data" onSubmit={serviceFormHandler}>
                             {error === true ?
@@ -145,20 +127,6 @@ const AdminSubServiceCreateField = () => {
                                 null
                             }
 
-                            {sub_service_id === undefined ?
-                                <div className="form-group">
-                                <label htmlFor="subServiceId">Master Service</label>
-                                <select className="form-control" id="exampleFormControlSelect1" value={subServiceId} onChange={subServiceIdHandler}>
-                                    {navServices.map((item) => {
-                                        return (<option key={item.id} value={item.id}>{item.name}</option>);
-                                    })}
-
-
-                                </select>
-                            </div>
-                            :
-                            null
-                            }
 
                             <div className="form-group">
                                 <label htmlFor="field_name">Field Name</label>

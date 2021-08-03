@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { GrStackOverflow } from "react-icons/gr";
 import { Link, useHistory } from "react-router-dom"
 import './AdminLogin.css'
@@ -8,13 +8,51 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { show, hide } from "../../features/loaderModalSlice"
 import axios from "../../axios"
 import { useDispatch } from 'react-redux'
-import {loginAdmin} from '../../features/adminUserSlice'
 import { toastStart, toastEnd } from "../../features/toasterSlice"
+import { selectAdminUser, loginAdmin, logoutAdmin } from "../../features/adminUserSlice"
 
 const AdminLogin = () => {
 
     const dispatch = useDispatch();
     let history = useHistory();
+
+    useEffect(async () => {
+
+        try {
+          if (localStorage.getItem(window.btoa("admin_token")) !== null) {
+            let adminUserTokenCheck = window.atob(localStorage.getItem(window.btoa("admin_token")));
+            if (adminUserTokenCheck !== null) {
+    
+              try {
+                const config = {
+                  headers: { Authorization: `Bearer ${adminUserTokenCheck}` }
+                };
+                const resp = await axios.get(`/api/admin/check/`, config);
+                if (resp.data.error) {
+                  dispatch(logoutAdmin())
+                  localStorage.removeItem(window.btoa("admin_token"));
+                  history.push("/admin")
+                }
+              } catch (err) {
+                // Handle Error Here
+                console.error(err);
+                dispatch(logoutAdmin())
+                localStorage.removeItem(window.btoa("admin_token"));
+                history.push("/admin")
+              }
+                
+            }
+    
+          }
+    
+        } catch (e) {
+          console.log("admin : "+ e)
+          localStorage.clear();
+          dispatch(logoutAdmin())
+        }
+    
+    
+      }, [dispatch]);
 
     const [email, setEmail] = useState("")
     const [forgotEmail, setForgotEmail] = useState("")

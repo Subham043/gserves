@@ -8,6 +8,7 @@ import axios from "../../axios"
 import { useDispatch } from 'react-redux'
 import { login } from '../../features/userSlice'
 import { show, hide } from "../../features/loaderModalSlice"
+import { toastStart, toastEnd } from "../../features/toasterSlice"
 
 const LoginForm = () => {
 
@@ -53,9 +54,23 @@ const LoginForm = () => {
                             if (response.data.result) {
                                 setShowProgress(false)
                                 dispatch(hide())
+                                dispatch(toastEnd())
+                                dispatch(toastStart({
+                                    toasterStatus: true,
+                                    toasterMessage: "User Loggedin Successfully",
+                                    toasterType: "success",
+                                    timeline: Date().toLocaleString()
+                                }))
+                                dispatch(toastEnd())
+                                setEmail("");
+                                setPassword("");
                                 dispatch(login(response.data.result))
-                                localStorage.setItem("token", response.data.result);
-                                history.push(`/`);
+                                localStorage.setItem(window.btoa("token"), window.btoa(response.data.result));
+                                let userToken = window.atob(localStorage.getItem(window.btoa("token")));
+                                if(userToken!==null){
+                                    history.push(`/`);
+                                    // window.location.reload();
+                                }
                             } else if (response.data.error) {
                                 setError(true)
                                 setErrorMessage(response.data.error)
@@ -67,11 +82,18 @@ const LoginForm = () => {
                         .catch(error => {
                             console.log(error)
                             setShowProgress(false)
+                            dispatch(toastEnd())
+                            dispatch(toastStart({
+                                toasterStatus: true,
+                                toasterMessage: "Oops! some error occurred",
+                                toasterType: "error",
+                                timeline: Date().toLocaleString()
+                            }))
+                            dispatch(toastEnd())
                         })
                 });
 
-            setEmail("");
-            setPassword("");
+            
             setError(false)
             setErrorMessage("")
 

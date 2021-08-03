@@ -7,6 +7,7 @@ import "./SimpleSlider.css"
 import axios from "../../axios"
 import { show, hide } from "../../features/loaderModalSlice"
 import { useDispatch } from "react-redux"
+import {useHistory} from 'react-router-dom'
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -75,6 +76,7 @@ const SimpleSlider = () => {
     const [navServices, setNavServices] = useState([]);
 
     const dispatch = useDispatch();
+    const history = useHistory();
 
 
 
@@ -162,6 +164,10 @@ const SimpleSlider = () => {
         document.querySelector(`#service__slider__inner__div_hover_div${i}`).style.bottom = '-' + height + 'px';
     }
 
+    const sub_service_page =(value) => {
+        history.push(`/service/${value}`)
+    }
+
 
     return (
         <div className="service__slider__outer__div" style={{ position: 'relative' }}>
@@ -199,7 +205,7 @@ const SimpleSlider = () => {
 
                                 <div key={innerElement.id} className="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                                     <div className="service__slider__inner__div_hover_div_text">
-                                        <p> {innerElement.name}</p>
+                                        <p onClick={()=>sub_service_page(innerElement.id)}> {innerElement.name}</p>
                                     </div>
                                 </div>
 

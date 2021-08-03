@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import './AdminServiceView.css'
+import './AdminTestimonialView.css'
 import axios from "../../axios"
 import { show, hide } from "../../features/loaderModalSlice"
 import {Link} from 'react-router-dom'
@@ -7,22 +7,18 @@ import { useDispatch, useSelector } from 'react-redux'
 import { selectAdminUser } from "../../features/adminUserSlice"
 import { toastStart, toastEnd } from "../../features/toasterSlice"
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
-import { GrView } from "react-icons/gr";
 
-const AdminServiceView = () => {
+const AdminTestimonialView = () => {
 
     const [navServices, setNavServices] = useState([]);
     
     const dispatch = useDispatch();
-    const [cityList, setCityList] = useState([]);
-    const [filterList, setFilterList] = useState([]);
-    const [filterValue, setFilterValue] = useState(0);
 
 
 
     useEffect(() => {
         dispatch(show())
-        axios.get(`/api/service/view`)
+        axios.get(`/api/testimonial/view`)
             .then((response) => {
                 
                 setNavServices(response.data.result)
@@ -34,19 +30,7 @@ const AdminServiceView = () => {
             })
     }, [dispatch])
 
-    useEffect(() => {
-        dispatch(show())
-        axios.get(`/api/city/view/`)
-            .then((response) => {
-                setCityList(response.data.result)
-                setFilterList(response.data.result)
-                dispatch(hide())
-            })
-            .catch((error) => {
-                console.log(error)
-                dispatch(hide())
-            })
-    }, [dispatch])
+
 
     const adminUser = useSelector(selectAdminUser)
     const config = {
@@ -60,7 +44,7 @@ const AdminServiceView = () => {
             dispatch(show())
             axios.get('/sanctum/csrf-cookie')
             .then(response => {
-                axios.delete(`/api/service/delete/${id}`, config)
+                axios.delete(`/api/testimonial/delete/${id}`, config)
                     .then((response) => {
                         
                         if(response.data.result){
@@ -105,35 +89,7 @@ const AdminServiceView = () => {
           }
     }
 
-    const setFilterValueHandler = (value) => {
-        setFilterValue(value)
-        if (value === 0) {
-            dispatch(show())
-            axios.get(`/api/service/view/`, config)
-                .then((response) => {
-                    setNavServices(response.data.result)
-                    dispatch(hide())
-                })
-                .catch((error) => {
-                    console.log(error)
-                    dispatch(hide())
-                })
-        } else {
-            dispatch(show())
-            axios.get(`/api/service/view/`, config)
-                .then((response) => {
-                    let filteredFormFields = response.data.result.filter((item) => {
-                        return parseInt(item.city) === (value);
-                    })
-                    setNavServices(filteredFormFields)
-                    dispatch(hide())
-                })
-                .catch((error) => {
-                    console.log(error)
-                    dispatch(hide())
-                })
-        }
-    }
+    
 
 
 
@@ -141,13 +97,7 @@ const AdminServiceView = () => {
     return (
         <div className="admin__right__main__service__view">
             <div className="create__btn__div">
-                <select className="form-control filter__select__style" id="field_type" value={filterValue} onChange={(e) => setFilterValueHandler(parseInt(e.target.value))}>
-                    <option value="0">ALL</option>
-                    {filterList.map((item) => (
-                        <option value={item.id} key={item.id}>{item.name}</option>
-                    ))}
-                </select>
-                <Link to="/admin/service/create" className="btn btn-primary card__btn">Create New Department</Link>
+                <Link to="/admin/testimonial/create" className="btn btn-primary card__btn">Create New Testimonial</Link>
             </div>
             <div className="row">
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
@@ -157,10 +107,9 @@ const AdminServiceView = () => {
                                 <tr>
                                     <th scope="col" >#</th>
                                     <th scope="col" >Action</th>
-                                    <th scope="col" >Department Name</th>
-                                    <th scope="col" >Department City</th>
-                                    <th scope="col" >Department Link</th>
-                                    <th scope="col" >Department Logo</th>
+                                    <th scope="col" >Name</th>
+                                    <th scope="col" >Description</th>
+                                    <th scope="col" >Image</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -170,17 +119,16 @@ const AdminServiceView = () => {
                                             return (
                                                 <tr key={item.id}>
                                                     <td>{index}</td>
-                                                    <td><Link to={`/admin/sub-service/view/${item.id}`} className="action__button action__view" title="view master service"><GrView /></Link> <Link to={`/admin/service/edit/${item.id}`} className="action__button action__edit" title="edit"><AiFillEdit /></Link> <button type="button" onClick={() => deleteHandler(item.id)} title="delete" className="action__button action__delete"><AiFillDelete /></button></td>
-                                                    <td>{item.title}</td>
-                                                    <td>{item.city_name}</td>
-                                                    <td>{item.url}</td>
-                                                    <td><img className="card-img-top" src={`http://127.0.0.1:8000/service/logo/${item.logo}`} alt="Card image cap" /></td>
+                                                    <td><Link to={`/admin/testimonial/edit/${item.id}`} className="action__button action__edit" title="edit"><AiFillEdit /></Link> <button type="button" onClick={() => deleteHandler(item.id)} title="delete" className="action__button action__delete"><AiFillDelete /></button></td>
+                                                    <td>{item.name}</td>
+                                                    <td>{item.description}</td>
+                                                    <td><img className="card-img-top" src={`http://127.0.0.1:8000/testimonial/${item.image}`} alt="Card image cap" /></td>
                                                 </tr>
                                             );
                                         })
                                         :
                                         <tr>
-                                            <td colSpan="14" style={{ textAlign: "center" }}>No Department Available!! Please create one</td>
+                                            <td colSpan="14" style={{ textAlign: "center" }}>No Testimonial Available!! Please create one</td>
                                         </tr>
                                 }
 
@@ -198,4 +146,4 @@ const AdminServiceView = () => {
     )
 }
 
-export default AdminServiceView
+export default AdminTestimonialView

@@ -18,7 +18,9 @@ const AdminSubServiceCreate = () => {
     const [description, setDescription] = useState("");
     const [tag_line, setTag_line] = useState("");
     const [city, setCity] = useState(1);
-    const [option, setOption] = useState(1);
+    const [option_online, setOption_online] = useState(false);
+    const [option_person, setOption_person] = useState(false);
+    const [option_representative, setOption_representative] = useState(false);
     const [output, setOutput] = useState("");
     const [time_taken, setTime_taken] = useState("");
     const [govt_fees, setGovt_fees] = useState("");
@@ -44,8 +46,16 @@ const AdminSubServiceCreate = () => {
         setCity(e.target.value)
     }
 
-    const optionHandler = (e) => {
-        setOption(e.target.value)
+    const inPersonHandler = () => {
+        setOption_person(!option_person)
+    }
+
+    const inOnlineHandler = () => {
+        setOption_online(!option_online)
+    }
+
+    const inRepresentativeHandler = () => {
+        setOption_representative(!option_representative)
     }
 
     const timeTakenHandler = (e) => {
@@ -120,7 +130,7 @@ const AdminSubServiceCreate = () => {
         setError(false)
         setErrorMessage("")
 
-        if (name.length === 0 || tracking_url.length === 0 || city.length === 0 || description.length === 0 || tag_line.length === 0 || output.length === 0 || option.length === 0 || time_taken.length === 0 || govt_fees.length === 0 || other_expenses.length === 0 || service_charges.length === 0 || storage_table_name.length === 0) {
+        if (name.length === 0 || tracking_url.length === 0 || city.length === 0 || description.length === 0 || tag_line.length === 0 || output.length === 0 || time_taken.length === 0 || govt_fees.length === 0 || other_expenses.length === 0 || service_charges.length === 0 || storage_table_name.length === 0) {
             setError(true)
             setErrorMessage("All fields are required")
         } else {
@@ -130,7 +140,9 @@ const AdminSubServiceCreate = () => {
             formData.append('description', description)
             formData.append('tag_line', tag_line)
             formData.append('output', output)
-            formData.append('option', option)
+            formData.append('option_person', option_person ? 1 : 0)
+            formData.append('option_online', option_online ? 1 : 0)
+            formData.append('option_representative', option_representative ? 1 : 0)
             formData.append('time_taken', time_taken)
             formData.append('govt_fees', govt_fees)
             formData.append('other_expenses', other_expenses)
@@ -159,7 +171,9 @@ const AdminSubServiceCreate = () => {
                                 setDescription("");
                                 setTag_line("");
                                 setCity(0);
-                                setOption(0);
+                                setOption_person(false);
+                                setOption_online(false);
+                                setOption_representative(false);
                                 setOutput("");
                                 setTime_taken("");
                                 setGovt_fees("");
@@ -232,7 +246,7 @@ const AdminSubServiceCreate = () => {
                                 setErrorMessage(response.data.service_charges)
                                 dispatch(hide())
                             }
-                            
+
                         })
                         .catch(error => {
                             console.log(error)
@@ -301,14 +315,28 @@ const AdminSubServiceCreate = () => {
                             </div>
                             <div className="form-group">
                                 <label htmlFor="option">Option</label>
-                                <select className="form-control" id="exampleFormControlSelect1" value={option} onChange={optionHandler}>
-                                    <option value="0">In Person</option>
-                                    <option value="1">Online</option>
-                                    <option value="2">Representative</option>
-
-
-                                </select>
                             </div>
+                            <div className="form-group" style={{display:"flex", justifyContent: "flex-start", alignItems: "center"}}>
+                                <div className="form-check" style={{marginRight:"10px"}}>
+                                    <input className="form-check-input" type="checkbox" onChange={inPersonHandler} id="in_person" checked={option_person} />
+                                    <label className="form-check-label" htmFor="in_person">
+                                        In Person
+                                    </label>
+                                </div>
+                                <div className="form-check" style={{marginRight:"10px"}}>
+                                    <input className="form-check-input" type="checkbox" value="" id="online" onChange={inOnlineHandler} checked={option_online} />
+                                    <label className="form-check-label" htmFor="online">
+                                        Online
+                                    </label>
+                                </div>
+                                <div className="form-check" style={{marginRight:"10px"}}>
+                                    <input className="form-check-input" type="checkbox" value="" id="representative" onChange={inRepresentativeHandler} checked={option_representative} />
+                                    <label className="form-check-label" htmFor="representative">
+                                        Representative
+                                    </label>
+                                </div>
+                            </div>
+
                             <div className="form-group">
                                 <label htmlFor="time_taken">Time Taken</label>
                                 <input type="text" className="form-control" id="time_taken" placeholder="Enter Time Taken" value={time_taken} onChange={timeTakenHandler} />

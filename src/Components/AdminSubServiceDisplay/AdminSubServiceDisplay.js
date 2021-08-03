@@ -18,7 +18,9 @@ const AdminSubServiceDisplay = () => {
     const [description, setDescription] = useState("");
     const [tag_line, setTag_line] = useState("");
     const [city, setCity] = useState(1);
-    const [option, setOption] = useState(1);
+    const [option_online, setOption_online] = useState(false);
+    const [option_person, setOption_person] = useState(false);
+    const [option_representative, setOption_representative] = useState(false);
     const [output, setOutput] = useState("");
     const [time_taken, setTime_taken] = useState("");
     const [govt_fees, setGovt_fees] = useState("");
@@ -61,7 +63,9 @@ const AdminSubServiceDisplay = () => {
                 setService_charges(response.data.result[0].service_charges)
                 setTracking_url(response.data.result[0].tracking_url)
                 setCity(parseInt(response.data.result[0].city))
-                setOption(parseInt(response.data.result[0].option))
+                setOption_online(parseInt(response.data.result[0].option_online) === 0 ? false : true)
+                setOption_person(parseInt(response.data.result[0].option_person) === 0 ? false : true)
+                setOption_representative(parseInt(response.data.result[0].option_representative) === 0 ? false : true)
                 dispatch(hide())
             })
             .catch((error) => {
@@ -101,7 +105,7 @@ const AdminSubServiceDisplay = () => {
                     <div className="create__btn__div">
                         <Link to={`/admin/sub-service-field/create/${sub_service_id}`} className="btn btn-primary card__btn">Create Form Fields</Link>
                     </div>
-                    
+
 
                 </div>
             </div>
@@ -145,13 +149,26 @@ const AdminSubServiceDisplay = () => {
                         </div>
                         <div className="form-group">
                             <label htmlFor="option">Option</label>
-                            <select className="form-control" id="exampleFormControlSelect1" value={option} readOnly={true}>
-                                <option value="0">In Person</option>
-                                <option value="1">Online</option>
-                                <option value="2">Representative</option>
-
-
-                            </select>
+                        </div>
+                        <div className="form-group" style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
+                            <div className="form-check" style={{ marginRight: "10px" }}>
+                                <input className="form-check-input" type="checkbox" value="" id="in_person" checked={option_person} />
+                                <label className="form-check-label" htmFor="in_person">
+                                    In Person
+                                </label>
+                            </div>
+                            <div className="form-check" style={{ marginRight: "10px" }}>
+                                <input className="form-check-input" type="checkbox" value="" id="online" checked={option_online} />
+                                <label className="form-check-label" htmFor="online">
+                                    Online
+                                </label>
+                            </div>
+                            <div className="form-check" style={{ marginRight: "10px" }}>
+                                <input className="form-check-input" type="checkbox" value="" id="representative" checked={option_representative} />
+                                <label className="form-check-label" htmFor="representative">
+                                    Representative
+                                </label>
+                            </div>
                         </div>
                         <div className="form-group">
                             <label htmlFor="time_taken">Time Taken</label>

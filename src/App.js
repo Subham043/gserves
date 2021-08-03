@@ -6,8 +6,9 @@ import Login from './Pages/Login/Login';
 import Otp from './Pages/Otp/Otp';
 import Phone from './Pages/Phone/Phone';
 import Service from './Pages/Service/Service';
+import ServiceForm from './Pages/ServiceForm/ServiceForm';
 import SocialOtp from './Pages/SocialOtp/SocialOtp';
-import { selectUser, login } from "./features/userSlice"
+import { selectUser, login, logout } from "./features/userSlice"
 import { selectAdminUser, loginAdmin, logoutAdmin } from "./features/adminUserSlice"
 import { useSelector, useDispatch } from "react-redux"
 import LoadingModal from './Components/LodaingModal/LoadingModal'
@@ -17,8 +18,10 @@ import AdminLogin from './Pages/AdminLogin/AdminLogin'
 import AdminResetPassword from './Pages/AdminResetPassword/AdminResetPassword'
 import AdminDashboard from './Pages/AdminDashboard/AdminDashboard'
 import AdminServiceDashboard from './Pages/AdminServiceDashboard/AdminServiceDashboard'
+import AdminTestimonialDashboard from './Pages/AdminTestimonialDashboard/AdminTestimonialDashboard'
 import AdminSubServiceDashboard from './Pages/AdminSubServiceDashboard/AdminSubServiceDashboard'
 import AdminSubServiceFieldDashboard from './Pages/AdminSubServiceFieldDashboard/AdminSubServiceFieldDashboard'
+import AdminCityDashboard from './Pages/AdminCityDashboard/AdminCityDashboard'
 import axios from "./axios"
 
 function App() {
@@ -27,10 +30,11 @@ function App() {
   const adminUser = useSelector(selectAdminUser)
   const dispatch = useDispatch();
   const history = useHistory();
-  let adminUserToken = null;
+  let adminUserToken;
   try {
     if (localStorage.getItem(window.btoa("admin_token")) !== null) {
       adminUserToken = window.atob(localStorage.getItem(window.btoa("admin_token")));
+      
       dispatch(loginAdmin(adminUserToken))
     }else{
       adminUserToken = null;
@@ -39,24 +43,70 @@ function App() {
   }catch(e){
     adminUserToken = null;
   }
-
-  useEffect(() => {
-    let user = localStorage.getItem("token");
-    if (user !== null) {
-      dispatch(login(user))
+ 
+  let userToken;
+  try {
+    if (localStorage.getItem(window.btoa("token")) !== null) {
+      userToken = window.atob(localStorage.getItem(window.btoa("token")));
+      dispatch(login(userToken))
+    }else{
+      userToken = null;
     }
-  }, [user]);
+
+  }catch(e){
+    userToken = null;
+  }
+
+
+  useEffect(async () => {
+
+    try {
+      if (localStorage.getItem(window.btoa("token")) !== null) {
+        let userTokenCheck = window.atob(localStorage.getItem(window.btoa("token")));
+        if (userTokenCheck !== null) {
+
+          try {
+            const config = {
+              headers: { Authorization: `Bearer ${userTokenCheck}` }
+            };
+            const resp = await axios.get(`/api/user/check/`, config);
+            if (resp.data.error) {
+              dispatch(logout())
+              localStorage.removeItem(window.btoa("token"));
+              history.push("/")
+            }
+          } catch (err) {
+            // Handle Error Here
+            console.error(err);
+            dispatch(logout())
+            localStorage.removeItem(window.btoa("token"));
+            history.push("/")
+          }
+            
+        }
+
+      }
+
+    } catch (e) {
+      console.log("user : "+ e)
+      localStorage.clear();
+      dispatch(logout())
+    }
+
+
+
+  }, [userToken]);
 
   useEffect(async () => {
 
     try {
       if (localStorage.getItem(window.btoa("admin_token")) !== null) {
-        let adminUserToken = window.atob(localStorage.getItem(window.btoa("admin_token")));
-        if (adminUserToken !== null) {
+        let adminUserTokenCheck = window.atob(localStorage.getItem(window.btoa("admin_token")));
+        if (adminUserTokenCheck !== null) {
 
           try {
             const config = {
-              headers: { Authorization: `Bearer ${adminUserToken}` }
+              headers: { Authorization: `Bearer ${adminUserTokenCheck}` }
             };
             const resp = await axios.get(`/api/admin/check/`, config);
             if (resp.data.error) {
@@ -77,11 +127,13 @@ function App() {
       }
 
     } catch (e) {
+      console.log("admin : "+ e)
       localStorage.clear();
       dispatch(logoutAdmin())
     }
 
-  }, []);
+
+  }, [dispatch,adminUserToken]);
 
 
 
@@ -91,23 +143,27 @@ function App() {
 
         <Route path="/" exact component={Home} />
         <Route path="/register" exact >
-          {user !== null ? <Redirect to="/" /> : <Register />}
+          {userToken !== null ? <Redirect to="/" /> : <Register />}
         </Route>
         <Route path="/login" exact >
-          {user !== null ? <Redirect to="/" /> : <Login />}
+          {userToken !== null ? <Redirect to="/" /> : <Login />}
         </Route>
         <Route path="/otp/:email" exact >
-          {user !== null ? <Redirect to="/" /> : <Otp />}
+          {userToken !== null ? <Redirect to="/" /> : <Otp />}
         </Route>
         <Route path="/phone/:email" exact >
-          {user !== null ? <Redirect to="/" /> : <Phone />}
+          {userToken !== null ? <Redirect to="/" /> : <Phone />}
         </Route>
         <Route path="/social/otp/:email" exact >
-          {user !== null ? <Redirect to="/" /> : <SocialOtp />}
+          {userToken !== null ? <Redirect to="/" /> : <SocialOtp />}
         </Route>
         <Route path="/service/:sub_service_id" exact >
           {/* {user !== null ? <Redirect to="/" /> : <Service />} */}
           <Service />
+        </Route>
+        <Route path="/service/form/:sub_service_id" exact >
+          {/* {user !== null ? <Redirect to="/" /> : <Service />} */}
+          <ServiceForm />
         </Route>
 
         {/* admin */}
@@ -132,12 +188,19 @@ function App() {
         <Route path="/admin/sub-service/:type/:sub_service_id" exact >
           {adminUserToken === null ? <Redirect to="/admin" /> : <AdminSubServiceDashboard />}
         </Route>
-        <Route path="/admin/sub-service-field/:type" exact >
+        <Route path="/admin/form-field/" exact >
           {adminUserToken === null ? <Redirect to="/admin" /> : <AdminSubServiceFieldDashboard />}
         </Route>
-        <Route path="/admin/sub-service-field/:type/:sub_service_id" exact >
-          {adminUserToken === null ? <Redirect to="/admin" /> : <AdminSubServiceFieldDashboard />}
+        <Route path="/admin/testimonial/:type" exact >
+          {adminUserToken === null ? <Redirect to="/admin" /> : <AdminTestimonialDashboard />}
         </Route>
+        <Route path="/admin/testimonial/:type/:id" exact >
+          {adminUserToken === null ? <Redirect to="/admin" /> : <AdminTestimonialDashboard />}
+        </Route>
+        <Route path="/admin/city/" exact >
+          {adminUserToken === null ? <Redirect to="/admin" /> : <AdminCityDashboard />}
+        </Route>
+        
 
       </Switch>
 

@@ -34,7 +34,6 @@ const AuthHero = (props) => {
             .then(response => {
                 axios.post('/api/social', formData,)
                     .then((response) => {
-
                         if (response.data.result) {
                             dispatch(hide())
                             if(response.data.result === "user created"){
@@ -43,8 +42,12 @@ const AuthHero = (props) => {
                                 history.push(`/phone/${response.data.email}`);
                             }else if(response.data.result === "Email verified"){
                                 dispatch(login(response.data.token))
-                                localStorage.setItem("token", response.data.token);
-                                 history.push(`/`);
+                                localStorage.setItem(window.btoa("token"), window.btoa(response.data.token));
+                                let userToken = window.atob(localStorage.getItem(window.btoa("token")));
+                                if(userToken!==null){
+                                    history.push(`/`);
+                                }
+                                 
                             }
                            
                         } 

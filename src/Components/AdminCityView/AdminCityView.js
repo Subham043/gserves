@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
-import './AdminSubServiceViewField.css'
+import './AdminCityView.css'
 import axios from "../../axios"
 import { show, hide } from "../../features/loaderModalSlice"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAdminUser } from "../../features/adminUserSlice"
 import { Link, useParams } from 'react-router-dom'
-import { BiBlock } from "react-icons/bi";
-import { VscVmActive } from "react-icons/vsc";
 import { toastStart, toastEnd } from "../../features/toasterSlice"
+import { AiFillDelete } from "react-icons/ai";
 
-const AdminSubServiceViewField = () => {
+const AdminCityView = () => {
 
     const [navServices, setNavServices] = useState([]);
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
-    const [field_type, setField_type] = useState("email");
-    const [field_name, setField_name] = useState("");
+    const [name, setName] = useState("");
+    const [state, setState] = useState("");
 
     const dispatch = useDispatch();
     const { sub_service_id } = useParams();
@@ -29,7 +28,7 @@ const AdminSubServiceViewField = () => {
     useEffect(() => {
         dispatch(show())
 
-        axios.get(`/api/form-field/view-all`, config)
+        axios.get(`/api/city/view`, config)
             .then((response) => {
                 setNavServices(response.data.result)
                 dispatch(hide())
@@ -45,12 +44,12 @@ const AdminSubServiceViewField = () => {
 
 
 
-    const fieldNameHandler = (e) => {
-        setField_name(e.target.value)
+    const nameHandler = (e) => {
+        setName(e.target.value)
     }
 
-    const fieldTypeHandler = (e) => {
-        setField_type(e.target.value)
+    const stateHandler = (e) => {
+        setState(e.target.value)
     }
 
     const serviceFormHandler = (e) => {
@@ -58,19 +57,19 @@ const AdminSubServiceViewField = () => {
         setError(false)
         setErrorMessage("")
 
-        if (field_name.length === 0) {
+        if (name.length === 0 || state.length === 0) {
             setError(true)
             setErrorMessage("All fields are required")
         } else {
 
             const formData = new FormData()
-            formData.append('field_name', field_name)
-            formData.append('field_type', field_type)
+            formData.append('name', name)
+            formData.append('state', state)
             dispatch(show())
 
             axios.get('/sanctum/csrf-cookie')
                 .then(response => {
-                    axios.post(`/api/form-field/create/`, formData, config)
+                    axios.post(`/api/city/create/`, formData, config)
                         .then((response) => {
 
                             if (response.data.result) {
@@ -83,7 +82,7 @@ const AdminSubServiceViewField = () => {
                                     timeline: Date().toLocaleString()
                                 }))
                                 dispatch(toastEnd())
-                                axios.get(`/api/form-field/view-all`, config)
+                                axios.get(`/api/city/view`, config)
                                     .then((response) => {
 
                                         setNavServices(response.data.result)
@@ -93,8 +92,8 @@ const AdminSubServiceViewField = () => {
                                         console.log(error)
                                         dispatch(hide())
                                     })
-                                setField_name("");
-                                setField_type("email");
+                                setName("");
+                                setState("");
                             } else if (response.data.error) {
                                 setError(true)
                                 setErrorMessage(response.data.error)
@@ -134,6 +133,58 @@ const AdminSubServiceViewField = () => {
         }
     }
 
+    const deleteHandler = (id) => {
+        if (!window.confirm("Are you sure you want to delete this?")){
+            return false;
+          }else{
+            dispatch(show())
+            axios.get('/sanctum/csrf-cookie')
+            .then(response => {
+                axios.delete(`/api/city/delete/${id}`, config)
+                    .then((response) => {
+                        
+                        if(response.data.result){
+                            dispatch(hide())
+                            dispatch(toastEnd())
+                            dispatch(toastStart({
+                                toasterStatus: true,
+                                toasterMessage: response.data.result,
+                                toasterType: "success",
+                                timeline: Date().toLocaleString()
+                            }))
+                            dispatch(toastEnd())
+                            let newnavServices = navServices.filter((item)=>{
+                                return item.id !== id;
+                            })
+                            setNavServices(newnavServices)
+                        }else if(response.data.error){
+                            dispatch(hide())
+                            dispatch(toastEnd())
+                            dispatch(toastStart({
+                                toasterStatus: true,
+                                toasterMessage: response.data.error,
+                                toasterType: "error",
+                                timeline: Date().toLocaleString()
+                            }))
+                            dispatch(toastEnd())
+                        }
+                        
+                    })
+                    .catch(error => {
+                        console.log(error)
+                        dispatch(hide())
+                        dispatch(toastEnd())
+                        dispatch(toastStart({
+                            toasterStatus: true,
+                            toasterMessage: "Oops! some error occured",
+                            toasterType: "error",
+                            timeline: Date().toLocaleString()
+                        }))
+                    })
+            });
+          }
+    }
+
 
 
 
@@ -157,40 +208,27 @@ const AdminSubServiceViewField = () => {
 
 
                             <div className="form-group">
-                                <label htmlFor="field_name">Field Name</label>
-                                <input type="text" className="form-control" id="field_name" placeholder="Enter Field Name" value={field_name} onChange={fieldNameHandler} />
+                                <label htmlFor="field_name">City Name</label>
+                                <input type="text" className="form-control" id="field_name" placeholder="Enter City Name" value={name} onChange={nameHandler} />
                             </div>
-
                             <div className="form-group">
-                                <label htmlFor="field_type">Field Type</label>
-                                <select className="form-control" id="field_type" value={field_type} onChange={fieldTypeHandler}>
-                                    <option value="email">Email</option>
-                                    <option value="text">Text</option>
-                                    <option value="description">Description</option>
-                                    <option value="number">Number</option>
-                                    <option value="mobile">Mobile</option>
-                                    <option value="date">Date</option>
-                                    <option value="attatchment">Attatchment</option>
-
-
-                                </select>
+                                <label htmlFor="field_name">State</label>
+                                <input type="text" className="form-control" id="field_name" placeholder="Enter State" value={state} onChange={stateHandler} />
                             </div>
-
-
 
                             <button type="submit" className="btn btn-primary card__btn">Create</button>
                         </form>
                     </div>
                 </div>
 
-                <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-4">
+                <div className="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-4">
                     <div className="row">
                         <table className="table table-striped">
                             <thead className="thead-dark">
                                 <tr>
-                                    <th scope="col" >Field Name</th>
-                                    <th scope="col" >Field Type</th>
-                                    <th scope="col" >Database Column Name</th>
+                                    <th scope="col" >Action</th>
+                                    <th scope="col" >Name</th>
+                                    <th scope="col" >State</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -199,9 +237,9 @@ const AdminSubServiceViewField = () => {
                                         navServices.map((item, index) => {
                                             return (
                                                 <tr key={item.id}>
-                                                    <td>{item.field_name}</td>
-                                                    <td>{item.field_type}</td>
-                                                    <td>{item.field_column_name}</td>
+                                                    <td><button type="button" onClick={() => deleteHandler(item.id)} title="delete" className="action__button action__delete"><AiFillDelete /></button></td>
+                                                    <td>{item.name}</td>
+                                                    <td>{item.state}</td>
                                                 </tr>
                                             );
                                         })
@@ -226,4 +264,4 @@ const AdminSubServiceViewField = () => {
     )
 }
 
-export default AdminSubServiceViewField
+export default AdminCityView
