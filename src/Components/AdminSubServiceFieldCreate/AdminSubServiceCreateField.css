@@ -17,8 +17,8 @@
 
 .admin__right__main__service__create .admin__right__main__service__create__form h2{
     display:inline-block;
-    border-bottom: 3px solid rgba(0, 160, 139, 1);
-    padding-bottom: 10px;
+    /* border-bottom: 3px solid rgba(0, 160, 139, 1);
+    padding-bottom: 10px; */
 }
 
 .admin__right__main__service__create .card__btn{

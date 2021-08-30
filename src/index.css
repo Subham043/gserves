@@ -15,3 +15,13 @@ code {
 .row{margin: 0 !important;}
 
 a{text-decoration: none !important;}
+
+button:focus, input:focus{
+  outline:none !important;
+}
+
+button:active, input:active{
+  outline:none !important;
+}
+
+

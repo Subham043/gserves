@@ -96,6 +96,9 @@ const AdminTestimonialView = () => {
     
     return (
         <div className="admin__right__main__service__view">
+            <div className="admin__right__main__service__view__form">
+                        <h2>VIEW TESTIMONIAL</h2>
+                    </div>
             <div className="create__btn__div">
                 <Link to="/admin/testimonial/create" className="btn btn-primary card__btn">Create New Testimonial</Link>
             </div>
@@ -106,10 +109,11 @@ const AdminTestimonialView = () => {
                             <thead className="thead-dark">
                                 <tr>
                                     <th scope="col" >#</th>
-                                    <th scope="col" >Action</th>
+                                    
                                     <th scope="col" >Name</th>
                                     <th scope="col" >Description</th>
                                     <th scope="col" >Image</th>
+                                    <th scope="col" >Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -119,10 +123,11 @@ const AdminTestimonialView = () => {
                                             return (
                                                 <tr key={item.id}>
                                                     <td>{index}</td>
-                                                    <td><Link to={`/admin/testimonial/edit/${item.id}`} className="action__button action__edit" title="edit"><AiFillEdit /></Link> <button type="button" onClick={() => deleteHandler(item.id)} title="delete" className="action__button action__delete"><AiFillDelete /></button></td>
+                                                    
                                                     <td>{item.name}</td>
                                                     <td>{item.description}</td>
-                                                    <td><img className="card-img-top" src={`http://127.0.0.1:8000/testimonial/${item.image}`} alt="Card image cap" /></td>
+                                                    <td><img className="card-img-top" src={`http://127.0.0.1:8000/testimonial/${item.image}`} alt="Card image cap" style={{maxWidth:"70px", display:"inline"}} /></td>
+                                                    <td><Link to={`/admin/testimonial/edit/${item.id}`} className="action__button action__edit testimonial__page__edit" title="edit"><AiFillEdit /></Link> <button type="button" onClick={() => deleteHandler(item.id)} title="delete" className="action__button action__delete testimonial__page__delete"><AiFillDelete /></button></td>
                                                 </tr>
                                             );
                                         })

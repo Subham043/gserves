@@ -1,0 +1,40 @@
+.main__service__procedure__outer__div .main__service__procedure_heading{
+    font-weight:700;
+    font-size: 27px;
+    color:rgba(0, 160, 139, 1);
+    text-align: center;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.main__service__procedure__outer__div .main__service__procedure__inner__div .main__service__procedure__list{
+    padding: 15px 0;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.main__service__procedure__outer__div .main__service__procedure__inner__div .main__service__procedure__list .main__service__procedure__list__no{
+    display:inline-block;
+    padding:5px 10px;
+    background-color:rgba(0,0,0,0.6);
+    margin-right: 10px;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 5px;
+    width:3%;
+    max-height: 35px;
+}
+
+.main__service__procedure__outer__div .main__service__procedure__inner__div .main__service__procedure__list .main__service__procedure__list__text{
+    font-weight: 400;
+    font-size: 18px;
+    display:inline-block;
+    width:93%;
+}
+
+.main__service__procedure__outer__div .main__service__procedure__inner__div{
+    width: 85%;
+    margin: auto;
+    padding-bottom: 35px;
+}

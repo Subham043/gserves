@@ -6,6 +6,7 @@ import AdminSubServiceView from '../../Components/AdminSubServiceView/AdminSubSe
 import AdminSubServiceCreate from '../../Components/AdminSubServiceCreate/AdminSubServiceCreate'
 import AdminSubServiceEdit from '../../Components/AdminSubServiceEdit/AdminSubServiceEdit'
 import AdminSubServiceDisplay from '../../Components/AdminSubServiceDisplay/AdminSubServiceDisplay'
+import AdminServiceFieldLink from '../../Components/AdminServiceFieldLink/AdminServiceFieldLink'
 import {useParams} from 'react-router-dom';
 import axios from "../../axios"
 import { selectAdminUser, loginAdmin, logoutAdmin } from "../../features/adminUserSlice"
@@ -68,6 +69,11 @@ const AdminServiceDashboard = () => {
             return (<AdminSubServiceEdit />);
         }else if(type==="display"){
             return (<AdminSubServiceDisplay />);
+        // }else if(type==="fields"){
+        //     return (<AdminServiceFieldLink />);
+        // }
+        }else if(type==="fields"){
+            return (<AdminServiceFieldLink />);
         }
     }
 

@@ -5,12 +5,12 @@ import axios from "../../axios"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAdminUser } from "../../features/adminUserSlice"
 import { toastStart, toastEnd } from "../../features/toasterSlice"
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 
 const AdminServiceEdit = () => {
 
-    const { service_id } = useParams();
-
+    const { city_id } = useParams();
+    const history = useHistory();
     const dispatch = useDispatch();
     const adminUser = useSelector(selectAdminUser)
     const [cityList, setCityList] = useState([]);
@@ -71,8 +71,19 @@ const AdminServiceEdit = () => {
 
     useEffect(() => {
         dispatch(show())
-        axios.get(`/api/service/view-by-id/${service_id}`, config)
+        axios.get(`/api/service/view-by-id/${city_id}`, config)
             .then((response) => {
+                if(response.data.result.length===0){
+                    dispatch(toastEnd())
+                    dispatch(toastStart({
+                        toasterStatus: true,
+                        toasterMessage: "Invalid Department ID",
+                        toasterType: "success",
+                        timeline: Date().toLocaleString()
+                    }))
+                    dispatch(toastEnd())
+                    history.push('/admin/dashboard')
+                }
                 setTitleDemo(response.data.result[0].title)
                 setTitle(response.data.result[0].title)
                 setUrlDemo(response.data.result[0].url)
@@ -122,7 +133,7 @@ const AdminServiceEdit = () => {
 
                 axios.get('/sanctum/csrf-cookie')
                     .then(response => {
-                        axios.post(`/api/service/update/${service_id}`, formData, config)
+                        axios.post(`/api/service/update/${city_id}`, formData, config)
                             .then((response) => {
 
                                 if (response.data.result) {
@@ -192,7 +203,7 @@ const AdminServiceEdit = () => {
 
                 axios.get('/sanctum/csrf-cookie')
                     .then(response => {
-                        axios.post(`/api/service/update/${service_id}`, formData, config)
+                        axios.post(`/api/service/update/${city_id}`, formData, config)
                             .then((response) => {
 
                                 if (response.data.result) {
@@ -246,7 +257,7 @@ const AdminServiceEdit = () => {
 
                 axios.get('/sanctum/csrf-cookie')
                     .then(response => {
-                        axios.post(`/api/service/update-logo/${service_id}`, logoData, config)
+                        axios.post(`/api/service/update-logo/${city_id}`, logoData, config)
                             .then((response) => {
 
                                 if (response.data.result) {
@@ -347,9 +358,7 @@ const AdminServiceEdit = () => {
                             <p className="card-text">{cityDemo}</p>
                             <p className="card-text">{urlDemo}</p>
                             <div style={{ textAlign: "center" }}>
-                                <button className="btn btn-primary card__btn">Edit</button>
-                                <button className="btn btn-primary card__btn">Delete</button>
-                                <button className="btn btn-primary card__btn">View Sub-Services</button>
+                                <button className="btn btn-primary card__btn">View Master Services</button>
                             </div>
 
                         </div>

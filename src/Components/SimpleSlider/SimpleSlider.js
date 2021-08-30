@@ -160,7 +160,7 @@ const SimpleSlider = () => {
     const boxRef = React.useRef([]);
 
     const heightFunc = (i) => {
-        let height = document.querySelector(`#service__slider__inner__div_hover_div${i}`).offsetHeight
+        let height = document.querySelector(`#service__slider__inner__div_hover_div${i}`).offsetHeight-15
         document.querySelector(`#service__slider__inner__div_hover_div${i}`).style.bottom = '-' + height + 'px';
     }
 

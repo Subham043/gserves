@@ -1,0 +1,70 @@
+.admin__service__field__link__outer__div .admin__service__field__link__inner__div .admin__service__field__link__heading{
+    color:#fff;
+    background-color:rgba(0, 160, 139, 1);
+    text-align: center;
+    padding:5px 10px;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.admin__service__field__link__outer__div  .admin__service__field__link__inner__div{
+    border:1px solid rgba(0, 160, 139, 1);
+    min-height:500px;
+}
+
+.admin__service__field__link__outer__div .admin__service__field__link__inner__div .admin__service__field__link__list__div{
+    padding: 10px;
+}
+
+.admin__service__field__link__outer__div .admin__service__field__link__inner__div .admin__service__field__link__list__div .admin__service__field__link__list__inner__div{
+    padding:10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border: 1px solid rgba(0, 160, 139, 1);
+    border-radius: 5px;
+    background-color:whitesmoke;
+    color:rgba(0, 160, 139, 1);
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.admin__service__field__link__outer__div .admin__service__field__link__inner__div .admin__service__field__link__list__div .admin__service__field__link__list__inner__div:hover{
+    box-shadow:3px 6px 13px 3px #ccc;
+    background-color:rgba(0, 160, 139, 1);
+    color:white;
+}
+
+.admin__service__field__link__outer__div .admin__service__field__link__inner__div .admin__service__field__link__list__div .admin__service__field__link__list__inner__div button {
+    padding: 5px 10px;
+    background-color:white;
+    color:rgba(0, 160, 139, 1);
+    border-radius: 5px;
+    border:1px solid rgba(0, 160, 139, 1);
+    transition: all 0.3s ease-in-out;
+}
+
+.admin__service__field__link__outer__div .admin__service__field__link__inner__div .admin__service__field__link__list__div .admin__service__field__link__list__inner__div button:hover {
+    box-shadow:1px 3px 6px -1px #000;
+}
+
+.mouse__drag__cursor:hover{
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.mouse__drag__cursor:active{
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.admin__service__field__link__outer__div .search__form__field{
+    width:100%;
+    padding: 5px 10px;
+    outline:none;
+    border-radius:5px;
+    border:1px solid rgba(0, 160, 139, 1);
+}

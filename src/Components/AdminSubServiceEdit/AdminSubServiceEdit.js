@@ -5,22 +5,21 @@ import axios from "../../axios"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAdminUser } from "../../features/adminUserSlice"
 import { toastStart, toastEnd } from "../../features/toasterSlice"
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 
 const AdminSubServiceEdit = () => {
 
     const {sub_service_id} = useParams();
-
+    const history = useHistory();
+    
     const dispatch = useDispatch();
     const adminUser = useSelector(selectAdminUser)
-    const [cityList, setCityList] = useState([]);
     const [navServices, setNavServices] = useState([]);
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [tag_line, setTag_line] = useState("");
-    const [city, setCity] = useState(1);
     const [option_online, setOption_online] = useState(false);
     const [option_person, setOption_person] = useState(false);
     const [option_representative, setOption_representative] = useState(false);
@@ -42,10 +41,6 @@ const AdminSubServiceEdit = () => {
 
     const tagLineHandler = (e) => {
         setTag_line(e.target.value)
-    }
-
-    const cityHandler = (e) => {
-        setCity(e.target.value)
     }
 
     const inPersonHandler = () => {
@@ -93,24 +88,22 @@ const AdminSubServiceEdit = () => {
     const config = {
         headers: { Authorization: `Bearer ${adminUser}` }
     };
-
-    useEffect(() => {
-        dispatch(show())
-        axios.get(`/api/city/view/`, config)
-            .then((response) => {
-                setCityList(response.data.result)
-                dispatch(hide())
-            })
-            .catch((error) => {
-                console.log(error)
-                dispatch(hide())
-            })
-    }, [dispatch])
     
     useEffect(() => {
         dispatch(show())
         axios.get(`/api/sub-service/view-by-id/${sub_service_id}`, config)
             .then((response) => {
+                if(response.data.result.length===0){
+                    dispatch(toastEnd())
+                    dispatch(toastStart({
+                        toasterStatus: true,
+                        toasterMessage: "Invalid Master Service ID",
+                        toasterType: "success",
+                        timeline: Date().toLocaleString()
+                    }))
+                    dispatch(toastEnd())
+                    history.push('/admin/dashboard')
+                }
                 setName(response.data.result[0].name)
                 setDescription(response.data.result[0].description)
                 setTag_line(response.data.result[0].tag_line)
@@ -120,10 +113,10 @@ const AdminSubServiceEdit = () => {
                 setOther_expenses(response.data.result[0].other_expenses)
                 setService_charges(response.data.result[0].service_charges)
                 setTracking_url(response.data.result[0].tracking_url)
-                setCity(parseInt(response.data.result[0].city))
                 setOption_online(parseInt(response.data.result[0].option_online)===0 ? false : true)
                 setOption_person(parseInt(response.data.result[0].option_person)===0 ? false : true)
                 setOption_representative(parseInt(response.data.result[0].option_representative)===0 ? false : true)
+                setService_id(parseInt(response.data.result[0].service_id))
                 dispatch(hide())
             })
             .catch((error) => {
@@ -153,7 +146,7 @@ const AdminSubServiceEdit = () => {
         setError(false)
         setErrorMessage("")
 
-        if (name.length === 0 || tracking_url.length === 0 || city.length === 0 || description.length === 0 || tag_line.length === 0 || output.length === 0 || time_taken.length === 0 || govt_fees.length === 0 || other_expenses.length === 0 || service_charges.length === 0) {
+        if (name.length === 0 || tracking_url.length === 0 || description.length === 0 || tag_line.length === 0 || output.length === 0 || time_taken.length === 0 || govt_fees.length === 0 || other_expenses.length === 0 || service_charges.length === 0) {
             setError(true)
             setErrorMessage("All fields are required")
         } else {
@@ -171,7 +164,7 @@ const AdminSubServiceEdit = () => {
             formData.append('other_expenses', other_expenses)
             formData.append('service_charges', service_charges)
             formData.append('tracking_url', tracking_url)
-            formData.append('city', city)
+            formData.append('service_id', service_id)
             dispatch(show())
 
             axios.get('/sanctum/csrf-cookie')
@@ -202,11 +195,6 @@ const AdminSubServiceEdit = () => {
                             else if (response.data.tracking_url) {
                                 setError(true)
                                 setErrorMessage(response.data.tracking_url)
-                                dispatch(hide())
-                            }
-                            else if (response.data.city) {
-                                setError(true)
-                                setErrorMessage(response.data.city)
                                 dispatch(hide())
                             }
                             else if (response.data.description) {
@@ -303,16 +291,6 @@ const AdminSubServiceEdit = () => {
                                 <input type="text" className="form-control" id="tag_line" placeholder="Enter Tag Line" value={tag_line} onChange={tagLineHandler} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="city">City</label>
-                                <select className="form-control" id="exampleFormControlSelect1" value={city} onChange={cityHandler}>
-                                    {cityList.map((item) => {
-                                        return (<option key={item.id} value={item.id}>{item.name}</option>);
-                                    })}
-
-
-                                </select>
-                            </div>
-                            <div className="form-group">
                                 <label htmlFor="output">Output</label>
                                 <textarea className="form-control" id="output" rows="3" placeholder="Enter Output" value={output} onChange={outputHandler} ></textarea>
                             </div>
@@ -322,19 +300,19 @@ const AdminSubServiceEdit = () => {
                             <div className="form-group" style={{display:"flex", justifyContent: "flex-start", alignItems: "center"}}>
                                 <div className="form-check" style={{marginRight:"10px"}}>
                                     <input className="form-check-input" type="checkbox" onChange={inPersonHandler} id="in_person" checked={option_person} />
-                                    <label className="form-check-label" htmFor="in_person">
+                                    <label className="form-check-label" htmlFor="in_person">
                                         In Person
                                     </label>
                                 </div>
                                 <div className="form-check" style={{marginRight:"10px"}}>
                                     <input className="form-check-input" type="checkbox" value="" id="online" onChange={inOnlineHandler} checked={option_online} />
-                                    <label className="form-check-label" htmFor="online">
+                                    <label className="form-check-label" htmlFor="online">
                                         Online
                                     </label>
                                 </div>
                                 <div className="form-check" style={{marginRight:"10px"}}>
                                     <input className="form-check-input" type="checkbox" value="" id="representative" onChange={inRepresentativeHandler} checked={option_representative} />
-                                    <label className="form-check-label" htmFor="representative">
+                                    <label className="form-check-label" htmlFor="representative">
                                         Representative
                                     </label>
                                 </div>

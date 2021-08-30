@@ -5,19 +5,18 @@ import axios from "../../axios"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectAdminUser } from "../../features/adminUserSlice"
 import { toastStart, toastEnd } from "../../features/toasterSlice"
+import { useParams } from 'react-router-dom'
 
 const AdminSubServiceCreate = () => {
 
     const dispatch = useDispatch();
     const adminUser = useSelector(selectAdminUser)
-    const [cityList, setCityList] = useState([]);
     const [navServices, setNavServices] = useState([]);
     const [error, setError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [tag_line, setTag_line] = useState("");
-    const [city, setCity] = useState(1);
     const [option_online, setOption_online] = useState(false);
     const [option_person, setOption_person] = useState(false);
     const [option_representative, setOption_representative] = useState(false);
@@ -27,8 +26,16 @@ const AdminSubServiceCreate = () => {
     const [other_expenses, setOther_expenses] = useState("");
     const [service_charges, setService_charges] = useState("");
     const [tracking_url, setTracking_url] = useState("");
-    const [storage_table_name, setStorage_table_name] = useState("");
     const [service_id, setService_id] = useState(1);
+    const [showDepartment, setShowDepartment] = useState(true);
+    const { sub_service_id } = useParams();
+
+    useEffect(()=>{
+        if(sub_service_id !== undefined){
+            setShowDepartment(false)
+            setService_id(parseInt(sub_service_id))
+        }
+    }, [sub_service_id])
 
     const nameHandler = (e) => {
         setName(e.target.value)
@@ -40,10 +47,6 @@ const AdminSubServiceCreate = () => {
 
     const tagLineHandler = (e) => {
         setTag_line(e.target.value)
-    }
-
-    const cityHandler = (e) => {
-        setCity(e.target.value)
     }
 
     const inPersonHandler = () => {
@@ -78,10 +81,6 @@ const AdminSubServiceCreate = () => {
         setService_charges(e.target.value)
     }
 
-    const storageTableNameHandler = (e) => {
-        setStorage_table_name(e.target.value)
-    }
-
     const trackingUrlHandler = (e) => {
         setTracking_url(e.target.value)
     }
@@ -96,18 +95,6 @@ const AdminSubServiceCreate = () => {
         headers: { Authorization: `Bearer ${adminUser}` }
     };
 
-    useEffect(() => {
-        dispatch(show())
-        axios.get(`/api/city/view/`, config)
-            .then((response) => {
-                setCityList(response.data.result)
-                dispatch(hide())
-            })
-            .catch((error) => {
-                console.log(error)
-                dispatch(hide())
-            })
-    }, [dispatch])
 
     useEffect(() => {
         dispatch(show())
@@ -130,7 +117,7 @@ const AdminSubServiceCreate = () => {
         setError(false)
         setErrorMessage("")
 
-        if (name.length === 0 || tracking_url.length === 0 || city.length === 0 || description.length === 0 || tag_line.length === 0 || output.length === 0 || time_taken.length === 0 || govt_fees.length === 0 || other_expenses.length === 0 || service_charges.length === 0 || storage_table_name.length === 0) {
+        if (name.length === 0 || tracking_url.length === 0 || description.length === 0 || tag_line.length === 0 || output.length === 0 || time_taken.length === 0 || govt_fees.length === 0 || other_expenses.length === 0 || service_charges.length === 0) {
             setError(true)
             setErrorMessage("All fields are required")
         } else {
@@ -147,9 +134,7 @@ const AdminSubServiceCreate = () => {
             formData.append('govt_fees', govt_fees)
             formData.append('other_expenses', other_expenses)
             formData.append('service_charges', service_charges)
-            formData.append('storage_table_name', storage_table_name)
             formData.append('tracking_url', tracking_url)
-            formData.append('city', city)
             dispatch(show())
 
             axios.get('/sanctum/csrf-cookie')
@@ -170,7 +155,6 @@ const AdminSubServiceCreate = () => {
                                 setName("");
                                 setDescription("");
                                 setTag_line("");
-                                setCity(0);
                                 setOption_person(false);
                                 setOption_online(false);
                                 setOption_representative(false);
@@ -180,7 +164,6 @@ const AdminSubServiceCreate = () => {
                                 setOther_expenses("");
                                 setService_charges("");
                                 setTracking_url("");
-                                setStorage_table_name("");
                             } else if (response.data.error) {
                                 setError(true)
                                 setErrorMessage(response.data.error)
@@ -196,11 +179,6 @@ const AdminSubServiceCreate = () => {
                                 setErrorMessage(response.data.tracking_url)
                                 dispatch(hide())
                             }
-                            else if (response.data.city) {
-                                setError(true)
-                                setErrorMessage(response.data.city)
-                                dispatch(hide())
-                            }
                             else if (response.data.description) {
                                 setError(true)
                                 setErrorMessage(response.data.description)
@@ -209,11 +187,6 @@ const AdminSubServiceCreate = () => {
                             else if (response.data.tag_line) {
                                 setError(true)
                                 setErrorMessage(response.data.tag_line)
-                                dispatch(hide())
-                            }
-                            else if (response.data.storage_table_name) {
-                                setError(true)
-                                setErrorMessage(response.data.storage_table_name)
                                 dispatch(hide())
                             }
                             else if (response.data.output) {
@@ -300,16 +273,6 @@ const AdminSubServiceCreate = () => {
                                 <input type="text" className="form-control" id="tag_line" placeholder="Enter Tag Line" value={tag_line} onChange={tagLineHandler} />
                             </div>
                             <div className="form-group">
-                                <label htmlFor="city">City</label>
-                                <select className="form-control" id="exampleFormControlSelect1" value={city} onChange={cityHandler}>
-                                    {cityList.map((item) => {
-                                        return (<option key={item.id} value={item.id}>{item.name}</option>);
-                                    })}
-
-
-                                </select>
-                            </div>
-                            <div className="form-group">
                                 <label htmlFor="output">Output</label>
                                 <textarea className="form-control" id="output" rows="3" placeholder="Enter Output" value={output} onChange={outputHandler} ></textarea>
                             </div>
@@ -319,19 +282,19 @@ const AdminSubServiceCreate = () => {
                             <div className="form-group" style={{display:"flex", justifyContent: "flex-start", alignItems: "center"}}>
                                 <div className="form-check" style={{marginRight:"10px"}}>
                                     <input className="form-check-input" type="checkbox" onChange={inPersonHandler} id="in_person" checked={option_person} />
-                                    <label className="form-check-label" htmFor="in_person">
+                                    <label className="form-check-label" htmlFor="in_person">
                                         In Person
                                     </label>
                                 </div>
                                 <div className="form-check" style={{marginRight:"10px"}}>
                                     <input className="form-check-input" type="checkbox" value="" id="online" onChange={inOnlineHandler} checked={option_online} />
-                                    <label className="form-check-label" htmFor="online">
+                                    <label className="form-check-label" htmlFor="online">
                                         Online
                                     </label>
                                 </div>
                                 <div className="form-check" style={{marginRight:"10px"}}>
                                     <input className="form-check-input" type="checkbox" value="" id="representative" onChange={inRepresentativeHandler} checked={option_representative} />
-                                    <label className="form-check-label" htmFor="representative">
+                                    <label className="form-check-label" htmlFor="representative">
                                         Representative
                                     </label>
                                 </div>
@@ -357,10 +320,7 @@ const AdminSubServiceCreate = () => {
                                 <label htmlFor="tracking_url">Tracking URL</label>
                                 <input type="text" className="form-control" id="tracking_url" placeholder="Enter Tracking URL" value={tracking_url} onChange={trackingUrlHandler} />
                             </div>
-                            <div className="form-group">
-                                <label htmlFor="storage_table_name">Database Table Name</label>
-                                <input type="text" className="form-control" id="storage_table_name" placeholder="Enter Database Table Name" value={storage_table_name} onChange={storageTableNameHandler} />
-                            </div>
+                            {showDepartment ? 
                             <div className="form-group">
                                 <label htmlFor="service">Department</label>
                                 <select className="form-control" id="service" value={service_id} onChange={serviceIdHandler}>
@@ -371,6 +331,7 @@ const AdminSubServiceCreate = () => {
 
                                 </select>
                             </div>
+                            : null }
 
 
                             <button type="submit" className="btn btn-primary card__btn">Create</button>

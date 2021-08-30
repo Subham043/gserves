@@ -20,7 +20,7 @@ import AdminDashboard from './Pages/AdminDashboard/AdminDashboard'
 import AdminServiceDashboard from './Pages/AdminServiceDashboard/AdminServiceDashboard'
 import AdminTestimonialDashboard from './Pages/AdminTestimonialDashboard/AdminTestimonialDashboard'
 import AdminSubServiceDashboard from './Pages/AdminSubServiceDashboard/AdminSubServiceDashboard'
-import AdminSubServiceFieldDashboard from './Pages/AdminSubServiceFieldDashboard/AdminSubServiceFieldDashboard'
+import AdminFormFieldDashboard from './Pages/AdminFormFieldDashboard/AdminFormFieldDashboard'
 import AdminCityDashboard from './Pages/AdminCityDashboard/AdminCityDashboard'
 import axios from "./axios"
 
@@ -179,7 +179,7 @@ function App() {
         <Route path="/admin/service/:type" exact >
           {adminUserToken === null ? <Redirect to="/admin" /> : <AdminServiceDashboard />}
         </Route>
-        <Route path="/admin/service/:type/:service_id" exact >
+        <Route path="/admin/service/:type/:city_id" exact >
           {adminUserToken === null ? <Redirect to="/admin" /> : <AdminServiceDashboard />}
         </Route>
         <Route path="/admin/sub-service/:type/" exact >
@@ -188,8 +188,8 @@ function App() {
         <Route path="/admin/sub-service/:type/:sub_service_id" exact >
           {adminUserToken === null ? <Redirect to="/admin" /> : <AdminSubServiceDashboard />}
         </Route>
-        <Route path="/admin/form-field/" exact >
-          {adminUserToken === null ? <Redirect to="/admin" /> : <AdminSubServiceFieldDashboard />}
+        <Route path="/admin/form-field/:type/" exact >
+          {adminUserToken === null ? <Redirect to="/admin" /> : <AdminFormFieldDashboard />}
         </Route>
         <Route path="/admin/testimonial/:type" exact >
           {adminUserToken === null ? <Redirect to="/admin" /> : <AdminTestimonialDashboard />}
