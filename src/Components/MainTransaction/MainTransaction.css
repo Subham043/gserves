@@ -1,0 +1,150 @@
+.main__transaction__outer__div{
+    padding-bottom: 50px;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div{
+    width:80%;
+    margin:auto;
+    margin-top: -60px;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div{
+    width:90%;
+    margin:auto;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id, .main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__service{
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__id__description, .main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__service .main__transaction__inner__display__id__description{
+    flex: 0 0 auto;
+    width:80%;
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__pagination{
+    flex: 0 0 auto;
+    width:20%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__id__description .main__transaction__inner__display__id__head, .main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__service .main__transaction__inner__display__id__description .main__transaction__inner__display__id__head{
+    flex: 0 0 auto;
+    width:35%;
+    font-size: 18px;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__id__description .main__transaction__inner__display__id__body, .main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__service .main__transaction__inner__display__id__description .main__transaction__inner__display__id__body{
+    flex: 0 0 auto;
+    width:65%;
+    font-size: 18px;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__pagination .arrow__btn{
+    background-color: white;
+    color: #818181;
+    padding:2px;
+    border: 1px solid #eee;
+    margin:0 5px;
+    min-width: 25px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__pagination .arrow__btn:hover{
+    transform: scale(1.1);
+    box-shadow: 4px 3px 5px -1px #000;
+    border: 1px solid #818181;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__pagination .total__page__num{
+    background-color: white;
+    color: #818181;
+    padding:2px 4px;
+    border: 1px solid #eee;
+    display: inline-block;
+    margin:0 5px;
+    min-width: 25px;
+    text-align: center;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div .main__transaction__inner__display__id .main__transaction__inner__display__pagination .page__num{
+    background-color: #818181;
+    color: white;
+    padding:2px 4px;
+    border: 1px solid #eee;
+    display: inline-block;
+    margin:0 5px;
+    min-width: 1px;
+    min-width: 25px;
+    text-align: center;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__btn{
+    width:95%;
+    margin:auto;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__btn button {
+    background-color: #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__btn button:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 3px 5px -1px #000;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__greener{
+    width:100%;
+    margin:auto;
+    background-color: rgba(0, 160, 139, 1);
+    padding: 15px 0;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__greener .main__transaction__inner__display__div__greener__text{
+    width:90%;
+    margin:auto;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__greener .main__transaction__inner__display__div__greener__text p{
+    margin-right: 15px;
+    color:#fff;
+    margin-bottom: 0;
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__greener .main__transaction__inner__display__div__greener__text button{
+    background-color:#00cfb4;
+    color:#fff;
+    padding: 9px 10px;
+    border-radius: 5px;
+    font-size: 22px;
+    transition: all 0.3s ease-in-out;
+}
+
+.main__transaction__outer__div .main__transaction__inner__div .main__transaction__inner__display__div__greener .main__transaction__inner__display__div__greener__text button:hover{
+    transform: scale(1.1);
+    box-shadow: 4px 3px 5px -1px #000;
+}
+

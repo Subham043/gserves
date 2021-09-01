@@ -31,7 +31,7 @@ const MainServiceForm = () => {
 
     useEffect(() => {
         dispatch(show())
-        axios.get(`/api/sub-service-fields/view/${sub_service_id}`, config)
+        axios.get(`/api/sub-service-form-fields/view-all-order/${sub_service_id}`, config)
             .then((response) => {
                 if (response.data.result.length === 0) {
                     history.push('/')

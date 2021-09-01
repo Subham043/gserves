@@ -1,7 +1,6 @@
 .service__form__hero__outer__div {
     position: relative;
     width: 100%;
-    pointer-events: none;
 }
 
 .service__form__hero__outer__div .service__form__hero__inner__div {

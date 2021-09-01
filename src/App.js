@@ -7,6 +7,8 @@ import Otp from './Pages/Otp/Otp';
 import Phone from './Pages/Phone/Phone';
 import Service from './Pages/Service/Service';
 import ServiceForm from './Pages/ServiceForm/ServiceForm';
+import Success from './Pages/Success/Success';
+import Transaction from './Pages/Transaction/Transaction';
 import SocialOtp from './Pages/SocialOtp/SocialOtp';
 import { selectUser, login, logout } from "./features/userSlice"
 import { selectAdminUser, loginAdmin, logoutAdmin } from "./features/adminUserSlice"
@@ -164,6 +166,14 @@ function App() {
         <Route path="/service/form/:sub_service_id" exact >
           {/* {user !== null ? <Redirect to="/" /> : <Service />} */}
           <ServiceForm />
+        </Route>
+        <Route path="/success/form/:sub_service_id" exact >
+          {/* {user !== null ? <Redirect to="/" /> : <Service />} */}
+          <Success />
+        </Route>
+        <Route path="/transaction/form/:sub_service_id/:status" exact >
+          {/* {user !== null ? <Redirect to="/" /> : <Service />} */}
+          <Transaction />
         </Route>
 
         {/* admin */}

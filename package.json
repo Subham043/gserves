@@ -21,6 +21,7 @@
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
     "react-toastify": "^7.0.4",
+    "react-tooltip": "^4.2.21",
     "rsuite": "^4.10.2",
     "slick-carousel": "^1.8.1"
   },

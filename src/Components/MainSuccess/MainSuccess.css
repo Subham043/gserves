@@ -1,0 +1,90 @@
+.main__success__outer__div .main__success__inner__div{
+    background-color: whitesmoke;
+    margin: auto;
+    width: 90%;
+    margin-top: -60px;
+    margin-bottom: 55px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 13px 19px 0 rgb(0 0 0 / 53%);
+}
+
+
+.main__success__outer__div .main__success__inner__div .form__outer_div{
+    background-color: #fff;
+    padding: 20px 10px;
+    border-radius: 10px;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container{
+    width:75%;
+    margin:auto;
+    padding-top: 70px;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner_thank{
+    text-align: center;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner_thank svg{
+    fill:rgba(0, 160, 139, 1);
+    width:100px;
+    height:100px;
+    margin-bottom: 20px;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner_thank p{
+    font-size: 25px;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner_request{
+    width: 60%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 160, 139, 1);
+    margin:auto;
+    text-align:center;
+    margin-bottom: 40px;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner_request p{
+    color: #fff;
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner_request button{
+    background-color:#00cfb4;
+    color:#fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 19px;
+    transition: all 0.3s ease-in-out;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner_request button:hover{
+    transform: scale(1.1);
+    box-shadow: 4px 3px 5px -1px #000;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner__btn__group{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner__btn__group button {
+    background-color: #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.main__success__outer__div .main__success__inner__div .form__outer_div .form__main__inner__container .form__main__inner__btn__group button:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 3px 5px -1px #000;
+}
+
+
+
+
